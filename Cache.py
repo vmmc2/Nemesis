@@ -85,5 +85,27 @@ class Cache:
 			for i in range (0, 1024):
 				sentence = f"Index: {i:04} ---- Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_dec} ---- Data: {self.table[i].word1}"
 				print(sentence)
+		elif self.tipo == 'A2':
+			for i in range(0, 512):
+				sentence = f"Index: {i:03} ---- Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_dec} ---- Word1: {self.table[i].word1} ---- Word2: {self.table[i].word2}"
+				print(sentence)
+		elif self.tipo == 'A3':
+			for i in range(0, 256):
+				sentence = f"Index: {i:03} ---- Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_dec} ---- Word1: {self.table[i].word1} ---- Word2: {self.table[i].word2}"
+				print(sentence)
+				sentence2 = f"                                                 Word3: {self.table[i].word3} ---- Word4: {self.table[i].word4}"
+				print(sentence2)
+				print(" ")
+		elif self.tipo == 'A4':
+			for i in range(0, 128):
+				sentence = f"Index: {i:03} ---- Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_dec} ---- Word1: {self.table[i].word1} ---- Word2: {self.table[i].word2}"
+				print(sentence)
+				sentence2 = f"                                                 Word3: {self.table[i].word3} ---- Word4: {self.table[i].word4}"
+				print(sentence2)
+				sentence2 = f"                                                 Word5: {self.table[i].word5} ---- Word6: {self.table[i].word6}"
+				print(sentence2)
+				sentence2 = f"                                                 Word7: {self.table[i].word7} ---- Word8: {self.table[i].word8}"
+				print(sentence2)
+				print(" ")
 		else:
-			pass
+			print("Boy, isso ainda nao foi implementado. Segura ai! XD")
