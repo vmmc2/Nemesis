@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import Cache as ch 
 
 def print_cont_arquivo(lista):
 	"""Funcao que serve para verificar se o arquivo foi lido corretamente"""
@@ -77,10 +78,12 @@ def main():
 	#ATE AGORA TA PEGANDO O INPUT PELO TERMINAL CERTINHO
 	#VAMOS TESTAR AGORA A SELECAO DO MODO DA CACHE
 	print("Selecione qual modo de Cache voce deseja simular: Por exemplo, se vc deseja simular uma Cache Direct-Mapping que apresenta 1 words/block, insira A1. Para mais exemplos, consulte a tabela acima.")
-	modo_cache = input("Selecione o modo de cache: ")
+	modo_cache = input()
 	if modo_cache == "A1": #CACHE DIRECT-MAPPING WITH 1 WORDS/BLOCK
-		pass
-	elif modo_cache == "A2":#CACHE DIRECT-MAPPING WITH 2 WORDS/BLOCK
+		#PRIMEIRO PASSO: INICIALIZAR A CACHE
+		memory = ch.Cache("A1")
+		memory.print_cache()
+	'''elif modo_cache == "A2":#CACHE DIRECT-MAPPING WITH 2 WORDS/BLOCK
 		pass
 	elif modo_cache == "A3":#CACHE DIRECT-MAPPING WITH 4 WORDS/BLOCK
 		pass
@@ -119,7 +122,7 @@ def main():
 	elif modo_cache == "E4":#CACHE FULLY ASSOCIATIVE WITH 8 WORDS/BLOCK
 		pass
 	else:
-		print("O modo de cache inserido nao eh valido.")
+		print("O modo de cache inserido nao eh valido.")'''
 
 
 if __name__ == "__main__":
