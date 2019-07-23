@@ -79,17 +79,35 @@ def main():
 	#VAMOS TESTAR AGORA A SELECAO DO MODO DA CACHE
 	print("Selecione qual modo de Cache voce deseja simular: Por exemplo, se vc deseja simular uma Cache Direct-Mapping que apresenta 1 words/block, insira A1. Para mais exemplos, consulte a tabela acima.")
 	modo_cache = input()
+	''' '''
+	'''VARIAVEIS QUE SERAO UTILIZADAS PARA COMPUTAR O MISS RATE, HIT RATE, ETC ETC'''
+	QTD_ACESSOS = qtd_enderecos
+	QTD_HITS = 0
+	QTD_MISSES = 0
+	QTD_MISSES_COMPULSORIOS = 0
+	QTD_MISSES_CONFLITO = 0
+	''' '''
 	if modo_cache == "A1": #CACHE DIRECT-MAPPING WITH 1 WORDS/BLOCK
 		#PRIMEIRO PASSO: INICIALIZAR A CACHE
 		memory = ch.Cache("A1")
 		memory.print_cache()
-	'''elif modo_cache == "A2":#CACHE DIRECT-MAPPING WITH 2 WORDS/BLOCK
-		pass
+		#SEGUNDO PASSO, HORA DE CALCULAR OS HITS E OS MISSES....
+		for num_address, data, mode in lista_de_enderecos:
+			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX: 
+
+	elif modo_cache == "A2":#CACHE DIRECT-MAPPING WITH 2 WORDS/BLOCK
+		#PRIMEIRO PASSO: INICIALIZAR A CACHE
+		memory = ch.Cache("A2")
+		memory.print_cache()
 	elif modo_cache == "A3":#CACHE DIRECT-MAPPING WITH 4 WORDS/BLOCK
-		pass
+		#PRIMEIRO PASSO: INICIALIZAR A CACHE
+		memory = ch.Cache("A3")
+		memory.print_cache()
 	elif modo_cache == "A4":#CACHE DIRECT-MAPPING WITH 8 WORDS/BLOCK
-		pass
-	elif modo_cache == "B1":#CACHE TWO-WAY SET ASSOCIATIVE WITH 1 WORDS/BLOCK
+		#PRIMEIRO PASSO: INICIALIZAR A CACHE
+		memory = ch.Cache("A4")
+		memory.print_cache()
+	'''elif modo_cache == "B1":#CACHE TWO-WAY SET ASSOCIATIVE WITH 1 WORDS/BLOCK
 		pass
 	elif modo_cache == "B2":#CACHE TWO-WAY SET ASSOCIATIVE WITH 2 WORDS/BLOCK
 		pass
