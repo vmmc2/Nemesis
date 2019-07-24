@@ -89,7 +89,7 @@ class Cache:
 	def print_cache(self):
 		if self.tipo == 'A1':
 			for i in range (0, 1024):
-				sentence = f"Index: {i:04} ---- Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_dec} ---- Data: {self.table[i].word1}"
+				sentence = f"Index: {i:04} ---- Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_bin} ---- Data: {self.table[i].word1}"
 				print(sentence)
 		elif self.tipo == 'A2':
 			for i in range(0, 512):
@@ -115,3 +115,111 @@ class Cache:
 				print(" ")
 		else:
 			print("Boy, isso ainda nao foi implementado. Segura ai! XD")
+
+	def write_cache(self, num_address, data, binary_address, tipo_cache):
+		if tipo_cache == 'A1':
+			#######################################
+			##  CONFIGURACAO DO ENDERECO 32 BITS ##
+			##    TAG                    INDEX   ##   
+			##  22 BITS                 1O BITS  ##
+			#######################################
+			i = int(binary_address[22:], 2)
+			print(f"i: {i} ---- index_binary: {binary_address[22:]} --- full binary address: {binary_address}")
+			self.table[i].index_binary = binary_address[22:]
+			self.table[i].tag_bin = binary_address[0:22]
+			self.table[i].word1 = data
+			self.table[i].valid_bit = 1;
+		elif tipo_cache == 'A2':
+			pass
+		elif tipo_cache == 'A3':
+			pass
+		elif tipo_cache == 'A4':
+			pass
+		elif tipo_cache == 'B1':
+			pass
+		elif tipo_cache == 'B2':
+			pass
+		elif tipo_cache == 'B3':
+			pass
+		elif tipo_cache == 'B4':
+			pass
+		elif tipo_cache == 'C1':
+			pass
+		elif tipo_cache == 'C2':
+			pass
+		elif tipo_cache == 'C3':
+			pass
+		elif tipo_cache == 'C4':
+			pass
+		elif tipo_cache == 'D1':
+			pass
+		elif tipo_cache == 'D2':
+			pass
+		elif tipo_cache == 'D3':
+			pass
+		elif tipo_cache == 'D4':
+			pass
+		elif tipo_cache == 'E1':
+			pass
+		elif tipo_cache == 'E2':
+			pass
+		elif tipo_cache == 'E3':
+			pass
+		elif tipo_cache == 'E4':
+			pass
+
+	def read_cache(self, num_address, data, binary_address, tipo_cache):
+		if tipo_cache == 'A1':
+			#######################################
+			##  CONFIGURACAO DO ENDERECO 32 BITS ##
+			##    TAG                    INDEX   ##   
+			##  22 BITS                 1O BITS  ##
+			#######################################
+			i = int(binary_address[22:], 2)
+			print(f"i: {i} ---- index_binary: {binary_address[22:]} --- full binary address: {binary_address}")
+			#### CASO NAO TENHA NADA NAQUELE BLOCK -- MISS COMPULSORY ####
+			if self.table[i].valid_bit == 0:
+				return 2
+			elif self.table[i].valid_bit == 1:
+				#E AGORA?
+			pass
+		elif tipo_cache == 'A2':
+			pass
+		elif tipo_cache == 'A3':
+			pass
+		elif tipo_cache == 'A4':
+			pass
+		elif tipo_cache == 'B1':
+			pass
+		elif tipo_cache == 'B2':
+			pass
+		elif tipo_cache == 'B3':
+			pass
+		elif tipo_cache == 'B4':
+			pass
+		elif tipo_cache == 'C1':
+			pass
+		elif tipo_cache == 'C2':
+			pass
+		elif tipo_cache == 'C3':
+			pass
+		elif tipo_cache == 'C4':
+			pass
+		elif tipo_cache == 'D1':
+			pass
+		elif tipo_cache == 'D2':
+			pass
+		elif tipo_cache == 'D3':
+			pass
+		elif tipo_cache == 'D4':
+			pass
+		elif tipo_cache == 'E1':
+			pass
+		elif tipo_cache == 'E2':
+			pass
+		elif tipo_cache == 'E3':
+			pass
+		elif tipo_cache == 'E4':
+			pass
+
+
