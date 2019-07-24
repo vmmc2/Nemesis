@@ -1,7 +1,10 @@
+import numpy as np 
+
 class Block():
 	def __init__(self, tipo): #Mesmo esquema: A1. A2. A3. A4. B1,...., E4
 		#BLOCK WITH 1 WORD PER BLOCK
 		if tipo == 'A1':
+			self.index_binary = None
 			self.valid_bit = 0
 			self.tag_dec = None
 			self.tag_bin = None
@@ -9,6 +12,7 @@ class Block():
 			self.word1 = None
 		#BLOCK WITH 2 WORDS PER BLOCK
 		elif tipo == 'A2':
+			self.index_binary = None
 			self.valid_bit = 0
 			self.tag_dec = None
 			self.tag_bin = None
@@ -17,6 +21,7 @@ class Block():
 			self.word2 = None
 		#BLOCK WITH 3 WORDS PER BLOCK
 		elif tipo == 'A3':
+			self.index_binary = None
 			self.valid_bit = 0
 			self.tag_dec = None
 			self.tag_bin = None
@@ -27,6 +32,7 @@ class Block():
 			self.word4 = None
 		#BLOCK WITH 4 WORDS PER BLOCK
 		elif tipo == 'A4':
+			self.index_binary = None
 			self.valid_bit = 0
 			self.tag_dec = None
 			self.tag_bin = None
