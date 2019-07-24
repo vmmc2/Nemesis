@@ -96,7 +96,7 @@ def main():
 	if modo_cache == "A1": #CACHE DIRECT-MAPPING WITH 1 WORDS/BLOCK
 		#PRIMEIRO PASSO: INICIALIZAR A CACHE
 		memory = ch.Cache("A1")
-		memory.print_cache()
+		#memory.print_cache()
 		#SEGUNDO PASSO, HORA DE CALCULAR OS HITS E OS MISSES....
 		for num_address, data, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
@@ -106,7 +106,7 @@ def main():
 			if mode == 'w':
 				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
 				memory.write_cache(num_address, data, binary_address, "A1")
-			elif mode == 'w':
+			elif mode == 'r':
 				hit_miss = memory.read_cache(num_address, data, binary_address, "A1")
 				if hit_miss == 1: #TIVEMOS UM HIT
 					QTD_HITS += 1
@@ -115,7 +115,8 @@ def main():
 					QTD_MISSES_COMPULSORIOS += 1
 				elif hit_miss == 3: #TIVEMOS UM MISS POR CONFLITO
 					QTD_MISSES += 1
-					QTD_MISSES_CONFLITO += 1
+					QTD_MISSES_CONFLITO += 1			
+		memory.print_cache()
 
 	#CACHE DO TIPO A2
 
