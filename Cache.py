@@ -19,6 +19,7 @@ class Block():
 			self.tag_hex = None
 			self.word1 = None
 			self.word2 = None
+			self.block_offset = None
 		#BLOCK WITH 3 WORDS PER BLOCK
 		elif tipo == 'A3':
 			self.index_binary = None
@@ -116,7 +117,7 @@ class Cache:
 		else:
 			print("Boy, isso ainda nao foi implementado. Segura ai! XD")
 
-	def write_cache(self, num_address, data, binary_address, tipo_cache):
+	def write_cache(self, num_address, binary_address, tipo_cache):
 		if tipo_cache == 'A1':
 			#######################################
 			##  CONFIGURACAO DO ENDERECO 32 BITS ##
@@ -127,14 +128,142 @@ class Cache:
 			print(f"i: {i} ---- index_binary: {binary_address[22:]} --- full binary address: {binary_address}")
 			self.table[i].index_binary = binary_address[22:]
 			self.table[i].tag_bin = binary_address[0:22]
-			self.table[i].word1 = data
+			self.table[i].word1 = int(num_address)
 			self.table[i].valid_bit = 1;
 		elif tipo_cache == 'A2':
-			pass
+			#######################################
+			##  CONFIGURACAO DO ENDERECO 32 BITS ##
+			##    TAG       INDEX   BLOCK OFFSET ##   
+			##  22 BITS    O9 BITS     01 BIT    ##
+			#######################################
+			i = int(binary_address[22:31],2) #INDEX
+			print(f"i: {i} ---- index_binary: {binary_address[22:31]} --- full binary address: {binary_address}")
+			self.table[i].index_binary = binary_address[22:31]
+			self.table[i].tag_bin = binary_address[0:22]
+			self.table[i].valid_bit = 1
+			self.table[i].block_offset = binary_address[-1]
+			if num_address % 2 == 0:
+				self.table[i].word1 = num_address
+				self.table[i].word2 = None
+			elif num_address % 2 == 1:
+				self.table[i].word1 = None
+				self.table[i].word2 = num_address
 		elif tipo_cache == 'A3':
-			pass
+			######################################################
+			##          CONFIGURACAO DO ENDERECO 32 BITS        ##
+			##    TAG                INDEX         BLOCK OFFSET ##   
+			##  22 BITS             O8 BITS           02 BIT    ##
+			######################################################
+			i = int(binary_address[22:31],2) #INDEX
+			print(f"i: {i} ---- index_binary: {binary_address[22:30]} --- full binary address: {binary_address}")
+			self.table[i].index_binary = binary_address[22:30]
+			self.table[i].tag_bin = binary_address[0:22]
+			self.table[i].valid_bit = 1
+			self.table[i].block_offset = binary_address[-2:]
+			if num_address % 4 == 0:
+				self.table[i].word1 = num_address
+				self.table[i].word2 = None
+				self.table[i].word3 = None
+				self.table[i].word4 = None
+			elif num_address % 4 == 1:
+				self.table[i].word1 = None
+				self.table[i].word2 = num_address
+				self.table[i].word3 = None
+				self.table[i].word4 = None
+			elif num_address % 4 == 2:
+				self.table[i].word1 = None
+				self.table[i].word2 = None
+				self.table[i].word3 = num_address
+				self.table[i].word4 = None
+			elif num_address % 4 == 3:
+				self.table[i].word1 = None
+				self.table[i].word2 = None
+				self.table[i].word3 = None
+				self.table[i].word4 = num_address
 		elif tipo_cache == 'A4':
-			pass
+			######################################################
+			##          CONFIGURACAO DO ENDERECO 32 BITS        ##
+			##    TAG                INDEX         BLOCK OFFSET ##   
+			##  22 BITS             O7 BITS           03 BIT    ##
+			######################################################
+			i = int(binary_address[22:31],2) #INDEX
+			print(f"i: {i} ---- index_binary: {binary_address[22:29]} --- full binary address: {binary_address}")
+			self.table[i].index_binary = binary_address[22:29]
+			self.table[i].tag_bin = binary_address[0:22]
+			self.table[i].valid_bit = 1
+			self.table[i].block_offset = binary_address[-3:]
+			if num_address % 8 == 0:
+				self.table[i].word1 = num_address
+				self.table[i].word2 = None
+				self.table[i].word3 = None
+				self.table[i].word4 = None
+				self.table[i].word5 = None
+				self.table[i].word6 = None
+				self.table[i].word7 = None
+				self.table[i].word8 = None
+			elif num_address % 8 == 1:
+				self.table[i].word1 = None
+				self.table[i].word2 = num_address
+				self.table[i].word3 = None
+				self.table[i].word4 = None
+				self.table[i].word5 = None
+				self.table[i].word6 = None
+				self.table[i].word7 = None
+				self.table[i].word8 = None
+			elif num_address % 8 == 2:
+				self.table[i].word1 = None
+				self.table[i].word2 = None
+				self.table[i].word3 = num_address
+				self.table[i].word4 = None
+				self.table[i].word5 = None
+				self.table[i].word6 = None
+				self.table[i].word7 = None
+				self.table[i].word8 = None
+			elif num_address % 8 == 3:
+				self.table[i].word1 = None
+				self.table[i].word2 = None
+				self.table[i].word3 = None
+				self.table[i].word4 = num_address
+				self.table[i].word5 = None
+				self.table[i].word6 = None
+				self.table[i].word7 = None
+				self.table[i].word8 = None
+			elif num_address % 8 == 4:
+				self.table[i].word1 = None
+				self.table[i].word2 = None
+				self.table[i].word3 = None
+				self.table[i].word4 = None
+				self.table[i].word5 = num_address
+				self.table[i].word6 = None
+				self.table[i].word7 = None
+				self.table[i].word8 = None
+			elif num_address % 8 == 5:
+				self.table[i].word1 = None
+				self.table[i].word2 = None
+				self.table[i].word3 = None
+				self.table[i].word4 = None
+				self.table[i].word5 = None
+				self.table[i].word6 = num_address
+				self.table[i].word7 = None
+				self.table[i].word8 = None
+			elif num_address % 8 == 6:
+				self.table[i].word1 = None
+				self.table[i].word2 = None
+				self.table[i].word3 = None
+				self.table[i].word4 = None
+				self.table[i].word5 = None
+				self.table[i].word6 = None
+				self.table[i].word7 = num_address
+				self.table[i].word8 = None
+			elif num_address % 8 == 7:
+				self.table[i].word1 = None
+				self.table[i].word2 = None
+				self.table[i].word3 = None
+				self.table[i].word4 = None
+				self.table[i].word5 = None
+				self.table[i].word6 = None
+				self.table[i].word7 = None
+				self.table[i].word8 = num_address
 		elif tipo_cache == 'B1':
 			pass
 		elif tipo_cache == 'B2':
@@ -168,7 +297,7 @@ class Cache:
 		elif tipo_cache == 'E4':
 			pass
 
-	def read_cache(self, num_address, data, binary_address, tipo_cache):
+	def read_cache(self, num_address, binary_address, tipo_cache):
 		if tipo_cache == 'A1':
 			#######################################
 			##  CONFIGURACAO DO ENDERECO 32 BITS ##
@@ -180,9 +309,8 @@ class Cache:
 			#### CASO NAO TENHA NADA NAQUELE BLOCK -- MISS COMPULSORY ####
 			if self.table[i].valid_bit == 0:
 				return 2
-			elif self.table[i].valid_bit == 1:
+			'''elif self.table[i].valid_bit == 1:
 				#E AGORA?
-			pass
 		elif tipo_cache == 'A2':
 			pass
 		elif tipo_cache == 'A3':
@@ -220,6 +348,6 @@ class Cache:
 		elif tipo_cache == 'E3':
 			pass
 		elif tipo_cache == 'E4':
-			pass
-
+			pass '''
+		
 
