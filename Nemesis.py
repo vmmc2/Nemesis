@@ -8,8 +8,8 @@ def print_cont_arquivo(lista):
 		print(endereco)
 
 def imprime_lista(lista):
-	for address, dado, modo in lista:
-		print("Address: {}  ----  Dado: {} ---- Modo de Acesso: {}".format(address, dado, modo))
+	for address, modo in lista:
+		print("Address: {}  ---- Modo de Acesso: {}".format(address, modo))
 
 def main():
 
@@ -47,7 +47,7 @@ def main():
 	print("OBS:. No caso de um arquivo do tipo .txt favor nomear o arquivo da seguinte maneira: 'entrada.txt' (sem aspas). Alem disso, o arquivo de entrada deve estar dentro da mesma pasta do projeto.")
 	print("Ademais, o arquivo devera ser organizado da segunte maneira, a primeira linha devera conter um numero n (quantidade de acessos a cache) e nas n linhas seguintes deveremos ter dois numeros e uma letra")
 	print("separados por um espaco de acordo com o seguinte layout:")
-	print("NUM_ADDRESS    DADO_A_SER_ESCRITO    MODO_DE_ACESSO.")
+	print("NUM_ADDRESS        MODO_DE_ACESSO.")
 	print("Tanto o endereco como o dado devem ser escrito de acordo com a base numerica decimal. O MODO_DE_ACESSO funciona assim: w(write) e r(read)")
 	print(" ")
 	print(" ")
@@ -70,11 +70,10 @@ def main():
 	elif type_input == 2: 
 		qtd_enderecos = eval(input("Digite a quantidade de enderecos a serem acessados: "))
 		for i in range(0, qtd_enderecos):
-			num_address, data, mode = input().split()
+			num_address, mode = input().split()
 			num_address = int(num_address)
-			data = int(data)
 			mode = str(mode)
-			lista_de_enderecos.append((num_address, data, mode))
+			lista_de_enderecos.append((num_address, mode))
 		imprime_lista(lista_de_enderecos)
 	#ATE AGORA TA PEGANDO O INPUT PELO TERMINAL CERTINHO
 	#VAMOS TESTAR AGORA A SELECAO DO MODO DA CACHE
@@ -98,16 +97,16 @@ def main():
 		memory = ch.Cache("A1")
 		#memory.print_cache()
 		#SEGUNDO PASSO, HORA DE CALCULAR OS HITS E OS MISSES....
-		for num_address, data, mode in lista_de_enderecos:
+		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
 			binary_address = np.binary_repr(num_address, 32)
 			sentence = f"Binary Address: {binary_address} ---- Decimal Address: {num_address}"
 			#MASSA, JA PASSEI O ENDERECO PARA BINARIO. HORA DE INSERIR NA CACHE...
 			if mode == 'w':
 				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
-				memory.write_cache(num_address, data, binary_address, "A1")
+				memory.write_cache(num_address, binary_address, "A1")
 			elif mode == 'r':
-				hit_miss = memory.read_cache(num_address, data, binary_address, "A1")
+				hit_miss = memory.read_cache(num_address, binary_address, "A1")
 				if hit_miss == 1: #TIVEMOS UM HIT
 					QTD_HITS += 1
 				elif hit_miss == 2: #TIVEMOS UM MISS COMPULSORIO
@@ -125,16 +124,16 @@ def main():
 		memory = ch.Cache("A2")
 		memory.print_cache()
 		#SEGUNDO PASSO, HORA DE CALCULAR OS HITS E OS MISSES....
-		for num_address, data, mode in lista_de_enderecos:
+		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
 			binary_address = np.binary_repr(num_address, 32)
 			sentence = f"Binary Address: {binary_address} ---- Decimal Address: {num_address}"
 			#MASSA, JA PASSEI O ENDERECO PARA BINARIO. HORA DE INSERIR NA CACHE...
 			if mode == 'w':
 				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
-				memory.write_cache(num_address, data, binary_address, "A2")
+				memory.write_cache(num_address, binary_address, "A2")
 			elif mode == 'w':
-				hit_miss = memory.read_cache(num_address, data, binary_address, "A2")
+				hit_miss = memory.read_cache(num_address, binary_address, "A2")
 				if hit_miss == 1: #TIVEMOS UM HIT
 					QTD_HITS += 1
 				elif hit_miss == 2: #TIVEMOS UM MISS COMPULSORIO
@@ -151,16 +150,16 @@ def main():
 		memory = ch.Cache("A3")
 		memory.print_cache()
 		#SEGUNDO PASSO, HORA DE CALCULAR OS HITS E OS MISSES....
-		for num_address, data, mode in lista_de_enderecos:
+		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
 			binary_address = np.binary_repr(num_address, 32)
 			sentence = f"Binary Address: {binary_address} ---- Decimal Address: {num_address}"
 			#MASSA, JA PASSEI O ENDERECO PARA BINARIO. HORA DE INSERIR NA CACHE...
 			if mode == 'w':
 				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
-				memory.write_cache(num_address, data, binary_address, "A3")
+				memory.write_cache(num_address, binary_address, "A3")
 			elif mode == 'w':
-				hit_miss = memory.read_cache(num_address, data, binary_address, "A3")
+				hit_miss = memory.read_cache(num_address, binary_address, "A3")
 				if hit_miss == 1: #TIVEMOS UM HIT
 					QTD_HITS += 1
 				elif hit_miss == 2: #TIVEMOS UM MISS COMPULSORIO
@@ -177,16 +176,16 @@ def main():
 		memory = ch.Cache("A4")
 		memory.print_cache()
 		#SEGUNDO PASSO, HORA DE CALCULAR OS HITS E OS MISSES....
-		for num_address, data, mode in lista_de_enderecos:
+		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
 			binary_address = np.binary_repr(num_address, 32)
 			sentence = f"Binary Address: {binary_address} ---- Decimal Address: {num_address}"
 			#MASSA, JA PASSEI O ENDERECO PARA BINARIO. HORA DE INSERIR NA CACHE...
 			if mode == 'w':
 				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
-				memory.write_cache(num_address, data, binary_address, "A4")
+				memory.write_cache(num_address, binary_address, "A4")
 			elif mode == 'w':
-				hit_miss = memory.read_cache(num_address, data, binary_address, "A4")
+				hit_miss = memory.read_cache(num_address, binary_address, "A4")
 				if hit_miss == 1: #TIVEMOS UM HIT
 					QTD_HITS += 1
 				elif hit_miss == 2: #TIVEMOS UM MISS COMPULSORIO
