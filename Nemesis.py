@@ -122,7 +122,6 @@ def main():
 	elif modo_cache == "A2":#CACHE DIRECT-MAPPING WITH 2 WORDS/BLOCK
 		#PRIMEIRO PASSO: INICIALIZAR A CACHE
 		memory = ch.Cache("A2")
-		memory.print_cache()
 		#SEGUNDO PASSO, HORA DE CALCULAR OS HITS E OS MISSES....
 		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
@@ -132,7 +131,7 @@ def main():
 			if mode == 'w':
 				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
 				memory.write_cache(num_address, binary_address, "A2")
-			elif mode == 'w':
+			elif mode == 'r':
 				hit_miss = memory.read_cache(num_address, binary_address, "A2")
 				if hit_miss == 1: #TIVEMOS UM HIT
 					QTD_HITS += 1
@@ -142,13 +141,13 @@ def main():
 				elif hit_miss == 3: #TIVEMOS UM MISS POR CONFLITO
 					QTD_MISSES += 1
 					QTD_MISSES_CONFLITO += 1
+		memory.print_cache()
 
 	#CACHE DO TIPO A3
 
 	elif modo_cache == "A3":#CACHE DIRECT-MAPPING WITH 4 WORDS/BLOCK
 		#PRIMEIRO PASSO: INICIALIZAR A CACHE
 		memory = ch.Cache("A3")
-		memory.print_cache()
 		#SEGUNDO PASSO, HORA DE CALCULAR OS HITS E OS MISSES....
 		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
@@ -158,7 +157,7 @@ def main():
 			if mode == 'w':
 				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
 				memory.write_cache(num_address, binary_address, "A3")
-			elif mode == 'w':
+			elif mode == 'r':
 				hit_miss = memory.read_cache(num_address, binary_address, "A3")
 				if hit_miss == 1: #TIVEMOS UM HIT
 					QTD_HITS += 1
@@ -168,13 +167,13 @@ def main():
 				elif hit_miss == 3: #TIVEMOS UM MISS POR CONFLITO
 					QTD_MISSES += 1
 					QTD_MISSES_CONFLITO += 1
+		memory.print_cache()
 
 	#CACHE DO TIPO A4
 
 	elif modo_cache == "A4":#CACHE DIRECT-MAPPING WITH 8 WORDS/BLOCK
 		#PRIMEIRO PASSO: INICIALIZAR A CACHE
 		memory = ch.Cache("A4")
-		memory.print_cache()
 		#SEGUNDO PASSO, HORA DE CALCULAR OS HITS E OS MISSES....
 		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
@@ -184,7 +183,7 @@ def main():
 			if mode == 'w':
 				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
 				memory.write_cache(num_address, binary_address, "A4")
-			elif mode == 'w':
+			elif mode == 'r':
 				hit_miss = memory.read_cache(num_address, binary_address, "A4")
 				if hit_miss == 1: #TIVEMOS UM HIT
 					QTD_HITS += 1
@@ -194,6 +193,7 @@ def main():
 				elif hit_miss == 3: #TIVEMOS UM MISS POR CONFLITO
 					QTD_MISSES += 1
 					QTD_MISSES_CONFLITO += 1
+		memory.print_cache()
 
 	#CACHE DO TIPO B1
 
