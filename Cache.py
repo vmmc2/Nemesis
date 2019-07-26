@@ -94,18 +94,18 @@ class Cache:
 				print(sentence)
 		elif self.tipo == 'A2':
 			for i in range(0, 512):
-				sentence = f"Index: {i:03} ---- Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_dec} ---- Word1: {self.table[i].word1} ---- Word2: {self.table[i].word2}"
+				sentence = f"Index: {i:03} ---- Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_bin} ---- Word1: {self.table[i].word1} ---- Word2: {self.table[i].word2}"
 				print(sentence)
 		elif self.tipo == 'A3':
 			for i in range(0, 256):
-				sentence = f"Index: {i:03} ---- Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_dec} ---- Word1: {self.table[i].word1} ---- Word2: {self.table[i].word2}"
+				sentence = f"Index: {i:03} ---- Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_bin} ---- Word1: {self.table[i].word1} ---- Word2: {self.table[i].word2}"
 				print(sentence)
 				sentence2 = f"                                                 Word3: {self.table[i].word3} ---- Word4: {self.table[i].word4}"
 				print(sentence2)
 				print(" ")
 		elif self.tipo == 'A4':
 			for i in range(0, 128):
-				sentence = f"Index: {i:03} ---- Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_dec} ---- Word1: {self.table[i].word1} ---- Word2: {self.table[i].word2}"
+				sentence = f"Index: {i:03} ---- Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_bin} ---- Word1: {self.table[i].word1} ---- Word2: {self.table[i].word2}"
 				print(sentence)
 				sentence2 = f"                                                 Word3: {self.table[i].word3} ---- Word4: {self.table[i].word4}"
 				print(sentence2)
@@ -352,7 +352,26 @@ class Cache:
 				#E AGORA: TEM QUE CHECAR PRA VER SE TEMOS UM HIT OU SE TEMOS UM MISS POR CONFLITO:
 				if binary_address[0:22] == self.table[i].tag_bin:
 					#CASO DE UM HIT: TEMOS QUE A TAG PRESENTE NO ENDERECO EH IGUAL A TAG PRESENTE NAQUELE BLOCO ESPECIFICO DA CACHE
-					return 1
+					if num_address % 2 == 0:
+						if self.table[i].word1 == num_address:
+							return 1
+						elif self.table[i].word1 == None:
+							self.table[i].index_binary = binary_address[22:31]
+							self.table[i].tag_bin = binary_address[0:22]
+							self.table[i].word1 = int(num_address)
+							self.table[i].word2 = int(num_address) + 1
+							self.table[i].valid_bit = 1
+							return 2
+					elif num_address % 2 == 1:
+						if self.table[i].word2 == num_address:
+							return 1
+						elif self.table[i].word2 == None:
+							self.table[i].index_binary = binary_address[22:31]
+							self.table[i].tag_bin = binary_address[0:22]
+							self.table[i].word1 = int(num_address) - 1
+							self.table[i].word2 = int(num_address)
+							self.table[i].valid_bit = 1
+							return 2
 				elif binary_address[0:22] != self.table[i].tag_bin:
 					#CASO DE UM MISS POR CONFLITO: 
 					if num_address % 2 == 0:
@@ -415,7 +434,54 @@ class Cache:
 				#E AGORA: TEM QUE CHECAR PRA VER SE TEMOS UM HIT OU SE TEMOS UM MISS POR CONFLITO:
 				if binary_address[0:22] == self.table[i].tag_bin:
 					#CASO DE UM HIT: TEMOS QUE A TAG PRESENTE NO ENDERECO EH IGUAL A TAG PRESENTE NAQUELE BLOCO ESPECIFICO DA CACHE
-					return 1
+					if num_address % 4 == 0:
+						if self.table[i].word1 == num_address:
+							return 1
+						elif self.table[i].word1 == None:
+							self.table[i].index_binary = binary_address[22:30]
+							self.table[i].tag_bin = binary_address[0:22]
+							self.table[i].word1 = int(num_address)
+							self.table[i].word2 = int(num_address) + 1
+							self.table[i].word3 = int(num_address) + 2
+							self.table[i].word4 = int(num_address) + 3
+							self.table[i].valid_bit = 1
+							return 2
+					elif num_address % 4 == 1:
+						if self.table[i].word2 == num_address:
+							return 1
+						elif self.table[i].word2 == None:
+							self.table[i].index_binary = binary_address[22:30]
+							self.table[i].tag_bin = binary_address[0:22]
+							self.table[i].word1 = int(num_address) - 1
+							self.table[i].word2 = int(num_address)
+							self.table[i].word3 = int(num_address) + 1
+							self.table[i].word4 = int(num_address) + 2
+							self.table[i].valid_bit = 1
+							return 2
+					elif num_address % 4 == 2:
+						if self.table[i].word3 == num_address:
+							return 1
+						elif self.table[i].word3 == None:
+							self.table[i].index_binary = binary_address[22:30]
+							self.table[i].tag_bin = binary_address[0:22]
+							self.table[i].word1 = int(num_address) - 2
+							self.table[i].word2 = int(num_address) - 1
+							self.table[i].word3 = int(num_address)
+							self.table[i].word4 = int(num_address) + 1
+							self.table[i].valid_bit = 1
+							return 2 
+					elif num_address % 4 == 3:
+						if self.table[i].word4 == num_address:
+							return 1
+						elif self.table[i].word4 == None:
+							self.table[i].index_binary = binary_address[22:30]
+							self.table[i].tag_bin = binary_address[0:22]
+							self.table[i].word1 = int(num_address) - 3
+							self.table[i].word2 = int(num_address) - 2
+							self.table[i].word3 = int(num_address) - 1
+							self.table[i].word4 = int(num_address)
+							self.table[i].valid_bit = 1
+							return 2
 				elif binary_address[0:22] != self.table[i].tag_bin:
 					#CASO DE UM MISS POR CONFLITO: 
 					if num_address % 4 == 0:
@@ -562,7 +628,134 @@ class Cache:
 				#E AGORA: TEM QUE CHECAR PRA VER SE TEMOS UM HIT OU SE TEMOS UM MISS POR CONFLITO:
 				if binary_address[0:22] == self.table[i].tag_bin:
 					#CASO DE UM HIT: TEMOS QUE A TAG PRESENTE NO ENDERECO EH IGUAL A TAG PRESENTE NAQUELE BLOCO ESPECIFICO DA CACHE
-					return 1
+					if num_address % 8 == 0:
+						if self.table[i].word1 == num_address:
+							return 1
+						elif self.table[i].word1 == None:
+							self.table[i].index_binary = binary_address[22:29]
+							self.table[i].tag_bin = binary_address[0:22]
+							self.table[i].word1 = int(num_address)
+							self.table[i].word2 = int(num_address) + 1
+							self.table[i].word3 = int(num_address) + 2
+							self.table[i].word4 = int(num_address) + 3
+							self.table[i].word5 = int(num_address) + 4
+							self.table[i].word6 = int(num_address) + 5
+							self.table[i].word7 = int(num_address) + 6
+							self.table[i].word8 = int(num_address) + 7
+							self.table[i].valid_bit = 1
+							return 2
+					elif num_address % 8 == 1:
+						if self.table[i].word2 == num_address:
+							return 1
+						elif self.table[i].word2 == None:
+							self.table[i].index_binary = binary_address[22:29]
+							self.table[i].tag_bin = binary_address[0:22]
+							self.table[i].word1 = int(num_address) - 1
+							self.table[i].word2 = int(num_address)
+							self.table[i].word3 = int(num_address) + 1
+							self.table[i].word4 = int(num_address) + 2
+							self.table[i].word5 = int(num_address) + 3
+							self.table[i].word6 = int(num_address) + 4
+							self.table[i].word7 = int(num_address) + 5
+							self.table[i].word8 = int(num_address) + 6
+							self.table[i].valid_bit = 1
+							return 2
+					elif num_address % 8 == 2:
+						if self.table[i].word3 == num_address:
+							return 1
+						elif self.table[i].word3 == None:
+							self.table[i].index_binary = binary_address[22:29]
+							self.table[i].tag_bin = binary_address[0:22]
+							self.table[i].word1 = int(num_address) - 2
+							self.table[i].word2 = int(num_address) - 1
+							self.table[i].word3 = int(num_address)
+							self.table[i].word4 = int(num_address) + 1
+							self.table[i].word5 = int(num_address) + 2
+							self.table[i].word6 = int(num_address) + 3
+							self.table[i].word7 = int(num_address) + 4
+							self.table[i].word8 = int(num_address) + 5
+							self.table[i].valid_bit = 1
+							return 2
+					elif num_address % 8 == 3:
+						if self.table[i].word4 == num_address:
+							return 1
+						elif self.table[i].word4 == None:
+							self.table[i].index_binary = binary_address[22:29]
+							self.table[i].tag_bin = binary_address[0:22]
+							self.table[i].word1 = int(num_address) - 3
+							self.table[i].word2 = int(num_address) - 2
+							self.table[i].word3 = int(num_address) - 1
+							self.table[i].word4 = int(num_address)
+							self.table[i].word5 = int(num_address) + 1
+							self.table[i].word6 = int(num_address) + 2
+							self.table[i].word7 = int(num_address) + 3
+							self.table[i].word8 = int(num_address) + 4
+							self.table[i].valid_bit = 1
+							return 2
+					elif num_address % 8 == 4:
+						if self.table[i].word5 == num_address:
+							return 1
+						elif self.table[i].word5 == None:
+							self.table[i].index_binary = binary_address[22:29]
+							self.table[i].tag_bin = binary_address[0:22]
+							self.table[i].word1 = int(num_address) - 4
+							self.table[i].word2 = int(num_address) - 3
+							self.table[i].word3 = int(num_address) - 2
+							self.table[i].word4 = int(num_address) - 1
+							self.table[i].word5 = int(num_address) 
+							self.table[i].word6 = int(num_address) + 1
+							self.table[i].word7 = int(num_address) + 2
+							self.table[i].word8 = int(num_address) + 3
+							self.table[i].valid_bit = 1
+							return 2
+					elif num_address % 8 == 5:
+						if self.table[i].word6 == num_address:
+							return 1
+						elif self.table[i].word6 == None:
+							self.table[i].index_binary = binary_address[22:29]
+							self.table[i].tag_bin = binary_address[0:22]
+							self.table[i].word1 = int(num_address) - 5
+							self.table[i].word2 = int(num_address) - 4
+							self.table[i].word3 = int(num_address) - 3
+							self.table[i].word4 = int(num_address) - 2
+							self.table[i].word5 = int(num_address) - 1
+							self.table[i].word6 = int(num_address) 
+							self.table[i].word7 = int(num_address) + 1
+							self.table[i].word8 = int(num_address) + 2
+							self.table[i].valid_bit = 1
+							return 2
+					elif num_address % 8 == 6:
+						if self.table[i].word7 == num_address:
+							return 1
+						elif self.table[i].word7 == None:
+							self.table[i].index_binary = binary_address[22:29]
+							self.table[i].tag_bin = binary_address[0:22]
+							self.table[i].word1 = int(num_address) - 6
+							self.table[i].word2 = int(num_address) - 5
+							self.table[i].word3 = int(num_address) - 4
+							self.table[i].word4 = int(num_address) - 3
+							self.table[i].word5 = int(num_address) - 2
+							self.table[i].word6 = int(num_address) - 1
+							self.table[i].word7 = int(num_address) 
+							self.table[i].word8 = int(num_address) + 1
+							self.table[i].valid_bit = 1
+							return 2
+					elif num_address % 8 == 7:
+						if self.table[i].word8 == num_address:
+							return 1
+						elif self.table[i].word8 == None:
+							self.table[i].index_binary = binary_address[22:29]
+							self.table[i].tag_bin = binary_address[0:22]
+							self.table[i].word1 = int(num_address) - 7
+							self.table[i].word2 = int(num_address) - 6
+							self.table[i].word3 = int(num_address) - 5
+							self.table[i].word4 = int(num_address) - 4
+							self.table[i].word5 = int(num_address) - 3
+							self.table[i].word6 = int(num_address) - 2
+							self.table[i].word7 = int(num_address) - 1
+							self.table[i].word8 = int(num_address) 
+							self.table[i].valid_bit = 1
+							return 2
 				elif binary_address[0:22] != self.table[i].tag_bin:
 					#CASO DE UM MISS POR CONFLITO
 					if num_address % 8 == 0:
@@ -664,7 +857,7 @@ class Cache:
 					return 3
 
 
-		elif tipo_cache == 'B1':
+		'''elif tipo_cache == 'B1':
 			pass
 		elif tipo_cache == 'B2':
 			pass
