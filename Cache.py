@@ -533,7 +533,7 @@ class Cache:
 					self.table[i].word7 = int(num_address) + 1
 					self.table[i].word8 = int(num_address) + 2
 					self.table[i].valid_bit = 1
-				elif num_address % 8 == 3:
+				elif num_address % 8 == 6:
 					self.table[i].index_binary = binary_address[22:29]
 					self.table[i].tag_bin = binary_address[0:22]
 					self.table[i].word1 = int(num_address) - 6
@@ -637,7 +637,7 @@ class Cache:
 						self.table[i].word7 = int(num_address) + 1
 						self.table[i].word8 = int(num_address) + 2
 						self.table[i].valid_bit = 1
-					elif num_address % 8 == 3:
+					elif num_address % 8 == 6:
 						self.table[i].index_binary = binary_address[22:29]
 						self.table[i].tag_bin = binary_address[0:22]
 						self.table[i].word1 = int(num_address) - 6
@@ -663,7 +663,7 @@ class Cache:
 						self.table[i].valid_bit = 1
 					return 3
 
-					
+
 		elif tipo_cache == 'B1':
 			pass
 		elif tipo_cache == 'B2':
