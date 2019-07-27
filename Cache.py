@@ -48,6 +48,10 @@ class Block():
 			self.word8 = None
 
 
+class Set:
+	def __init__(self, tipo):
+		pass
+	
 
 
 class Cache:
@@ -84,8 +88,39 @@ class Cache:
 			for element in range(0, 128):
 				bloco = Block("A4")
 				self.table.append(bloco)
-		else:
-			print("Ai ja eh set-associative. Nao ta implementado ainda")
+		elif tipo == 'B1':
+			self.tipo = 'B1'
+		elif tipo == 'B2':
+			self.tipo = 'B2'
+		elif tipo == 'B3':
+			self.tipo = 'B3'
+		elif tipo == 'B4':
+			self.tipo = 'B4'
+		elif tipo == 'C1':
+			self.tipo = 'C1'
+		elif tipo == 'C2':
+			self.tipo = 'C2'
+		elif tipo == 'C3':
+			self.tipo = 'C3'
+		elif tipo == 'C4':
+			self.tipo = 'C4'
+		elif tipo == 'D1':
+			self.tipo = 'D1'
+		elif tipo == 'D2':
+			self.tipo = 'D2'
+		elif tipo == 'D3':
+			self.tipo = 'D3'
+		elif tipo == 'D4':
+			self.tipo = 'D4'
+		elif tipo == 'E1':
+			self.tipo = 'E1'
+		elif tipo == 'E2':
+			self.tipo = 'E2'
+		elif tipo == 'E3':
+			self.tipo = 'E3'
+		elif tipo == 'E4':
+			self.tipo = 'E4'
+		
 
 	def print_cache(self):
 		if self.tipo == 'A1':
