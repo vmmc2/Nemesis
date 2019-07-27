@@ -112,14 +112,6 @@ class Cache:
 			self.tipo = 'D3'
 		elif tipo == 'D4':
 			self.tipo = 'D4'
-		elif tipo == 'E1':
-			self.tipo = 'E1'
-		elif tipo == 'E2':
-			self.tipo = 'E2'
-		elif tipo == 'E3':
-			self.tipo = 'E3'
-		elif tipo == 'E4':
-			self.tipo = 'E4'
 		
 
 	def print_cache(self):
@@ -322,14 +314,6 @@ class Cache:
 		elif tipo_cache == 'D3':
 			pass
 		elif tipo_cache == 'D4':
-			pass
-		elif tipo_cache == 'E1':
-			pass
-		elif tipo_cache == 'E2':
-			pass
-		elif tipo_cache == 'E3':
-			pass
-		elif tipo_cache == 'E4':
 			pass
 
 	def read_cache(self, num_address, binary_address, tipo_cache):
@@ -916,13 +900,6 @@ class Cache:
 			pass
 		elif tipo_cache == 'D4':
 			pass
-		elif tipo_cache == 'E1':
-			pass
-		elif tipo_cache == 'E2':
-			pass
-		elif tipo_cache == 'E3':
-			pass
-		elif tipo_cache == 'E4':
-			pass '''
+		
 		
 
