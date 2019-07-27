@@ -30,15 +30,15 @@ def main():
 	print(" ")
 	print("O Nemesis conta com as seguintes variedades para implementar e trabalhar com um cache de 1024 palavras:")
 	print("  ")
-	print("******************************************************************************  NEMESIS SIMULATOR ******************************************************************************")
-	print("*               A                             B                                        C                                          D                                   E        *")
-	print("*         Direct-Mapping  -------  Two-Way Set Associative  --------------- Four-Way Set Associative ---------------  Eight-Way Set Associative  ----------  Fully Associative *")
-	print("*(I)      1 words/block                1 words/block                             1 words/block                              1 words/block                      1 words/block   *")
-	print("*(II)     2 words/block                2 words/block                             2 words/block                              2 words/block                      2 words/block   *")
-	print("*(III)    4 words/block                4 words/block                             4 words/block                              4 words/block                      4 words/block   *")
-	print("*(IV)     8 words/block                8 words/block                             8 words/block                              8 words/block                      8 words/block   *")
-	print("*                                                                                                                                                                              *")
-	print("********************************************************************************************************************************************************************************")
+	print("*******************************************************************  NEMESIS SIMULATOR *****************************************************************")
+	print("*               A                             B                                        C                                          D                    *")
+	print("*         Direct-Mapping  -------  Two-Way Set Associative  --------------- Four-Way Set Associative --------------------  Fully Associative           *")
+	print("*(I)      1 words/block                1 words/block                             1 words/block                               1 words/block             *")
+	print("*(II)     2 words/block                2 words/block                             2 words/block                               2 words/block             *")
+	print("*(III)    4 words/block                4 words/block                             4 words/block                               4 words/block             *")
+	print("*(IV)     8 words/block                8 words/block                             8 words/block                               8 words/block             *")
+	print("*                                                                                                                                                      *")
+	print("********************************************************************************************************************************************************")
 	print(" ")
 	print("O Nemesis suporta tanto escritas como leituras.")
 	print("Primeiramente, o usuario devera informar se o input sera por meio do terminal ou por meio de um arquivo do tipo .txt")
@@ -220,14 +220,6 @@ def main():
 	elif modo_cache == "D3":#CACHE EIGHT-WAY SET ASSOCIATIVE WITH 4 WORDS/BLOCK
 		pass
 	elif modo_cache == "D4":#CACHE EIGHT-WAY SET ASSOCIATIVE WITH 8 WORDS/BLOCK
-		pass
-	elif modo_cache == "E1":#CACHE FULLY ASSOCIATIVE WITH 1 WORDS/BLOCK
-		pass
-	elif modo_cache == "E2":#CACHE FULLY ASSOCIATIVE WITH 2 WORDS/BLOCK
-		pass
-	elif modo_cache == "E3":#CACHE FULLY ASSOCIATIVE WITH 4 WORDS/BLOCK
-		pass
-	elif modo_cache == "E4":#CACHE FULLY ASSOCIATIVE WITH 8 WORDS/BLOCK
 		pass
 	else:
 		print("O modo de cache inserido nao eh valido.")'''
