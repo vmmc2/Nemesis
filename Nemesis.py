@@ -197,30 +197,282 @@ def main():
 
 	#CACHE DO TIPO B1
 
-	'''elif modo_cache == "B1":#CACHE TWO-WAY SET ASSOCIATIVE WITH 1 WORDS/BLOCK
-		pass
+	elif modo_cache == "B1":#CACHE TWO-WAY SET ASSOCIATIVE WITH 1 WORDS/BLOCK
+		#PRIMEIRO PASSO: INICIALIZAR A CACHE
+		memory = ch.cache("B1")
+		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
+		for num_address, mode in lista_de_enderecos:
+			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
+			binary_address = np.binary_repr(num_address, 32)
+			sentence = f"Binary Address: {binary_address} ---- Decimal Address: {num_address}"
+			#MASSA, JA PASSEI O ENDERECO PARA BINARIO. HORA DE INSERIR NA CACHE...
+			if mode == 'w':
+				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
+				memory.write_cache(num_address, binary_address, "B1")
+			elif mode == 'r':
+				hit_miss = memory.read_cache(num_address, binary_address, "B1")
+				if hit_miss == 1: #TIVEMOS UM HIT
+					QTD_HITS += 1
+				elif hit_miss == 2: #TIVEMOS UM MISS COMPULSORIO
+					QTD_MISSES += 1
+					QTD_MISSES_COMPULSORIOS += 1
+				elif hit_miss == 3: #TIVEMOS UM MISS POR CONFLITO
+					QTD_MISSES += 1
+					QTD_MISSES_CONFLITO += 1
+		memory.print_cache()
 	elif modo_cache == "B2":#CACHE TWO-WAY SET ASSOCIATIVE WITH 2 WORDS/BLOCK
-		pass
+		#PRIMEIRO PASSO: INICIALIZAR A CACHE
+		memory = ch.cache("B2")
+		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
+		for num_address, mode in lista_de_enderecos:
+			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
+			binary_address = np.binary_repr(num_address, 32)
+			sentence = f"Binary Address: {binary_address} ---- Decimal Address: {num_address}"
+			#MASSA, JA PASSEI O ENDERECO PARA BINARIO. HORA DE INSERIR NA CACHE...
+			if mode == 'w':
+				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
+				memory.write_cache(num_address, binary_address, "B2")
+			elif mode == 'r':
+				hit_miss = memory.read_cache(num_address, binary_address, "B2")
+				if hit_miss == 1: #TIVEMOS UM HIT
+					QTD_HITS += 1
+				elif hit_miss == 2: #TIVEMOS UM MISS COMPULSORIO
+					QTD_MISSES += 1
+					QTD_MISSES_COMPULSORIOS += 1
+				elif hit_miss == 3: #TIVEMOS UM MISS POR CONFLITO
+					QTD_MISSES += 1
+					QTD_MISSES_CONFLITO += 1
+		memory.print_cache()
 	elif modo_cache == "B3":#CACHE TWO-WAY SET ASSOCIATIVE WITH 4 WORDS/BLOCK
-		pass
+		#PRIMEIRO PASSO: INICIALIZAR A CACHE
+		memory = ch.cache("B3")
+		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
+		for num_address, mode in lista_de_enderecos:
+			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
+			binary_address = np.binary_repr(num_address, 32)
+			sentence = f"Binary Address: {binary_address} ---- Decimal Address: {num_address}"
+			#MASSA, JA PASSEI O ENDERECO PARA BINARIO. HORA DE INSERIR NA CACHE...
+			if mode == 'w':
+				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
+				memory.write_cache(num_address, binary_address, "B3")
+			elif mode == 'r':
+				hit_miss = memory.read_cache(num_address, binary_address, "B3")
+				if hit_miss == 1: #TIVEMOS UM HIT
+					QTD_HITS += 1
+				elif hit_miss == 2: #TIVEMOS UM MISS COMPULSORIO
+					QTD_MISSES += 1
+					QTD_MISSES_COMPULSORIOS += 1
+				elif hit_miss == 3: #TIVEMOS UM MISS POR CONFLITO
+					QTD_MISSES += 1
+					QTD_MISSES_CONFLITO += 1
+		memory.print_cache()
 	elif modo_cache == "B4":#CACHE TWO-WAY SET ASSOCIATIVE WITH 8 WORDS/BLOCK
-		pass
+		#PRIMEIRO PASSO: INICIALIZAR A CACHE
+		memory = ch.cache("B4")
+		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
+		for num_address, mode in lista_de_enderecos:
+			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
+			binary_address = np.binary_repr(num_address, 32)
+			sentence = f"Binary Address: {binary_address} ---- Decimal Address: {num_address}"
+			#MASSA, JA PASSEI O ENDERECO PARA BINARIO. HORA DE INSERIR NA CACHE...
+			if mode == 'w':
+				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
+				memory.write_cache(num_address, binary_address, "B4")
+			elif mode == 'r':
+				hit_miss = memory.read_cache(num_address, binary_address, "B4")
+				if hit_miss == 1: #TIVEMOS UM HIT
+					QTD_HITS += 1
+				elif hit_miss == 2: #TIVEMOS UM MISS COMPULSORIO
+					QTD_MISSES += 1
+					QTD_MISSES_COMPULSORIOS += 1
+				elif hit_miss == 3: #TIVEMOS UM MISS POR CONFLITO
+					QTD_MISSES += 1
+					QTD_MISSES_CONFLITO += 1
+		memory.print_cache()
 	elif modo_cache == "C1":#CACHE FOUR-WAY SET ASSOCIATIVE WITH 1 WORDS/BLOCK
-		pass
+		#PRIMEIRO PASSO: INICIALIZAR A CACHE
+		memory = ch.cache("C1")
+		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
+		for num_address, mode in lista_de_enderecos:
+			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
+			binary_address = np.binary_repr(num_address, 32)
+			sentence = f"Binary Address: {binary_address} ---- Decimal Address: {num_address}"
+			#MASSA, JA PASSEI O ENDERECO PARA BINARIO. HORA DE INSERIR NA CACHE...
+			if mode == 'w':
+				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
+				memory.write_cache(num_address, binary_address, "C1")
+			elif mode == 'r':
+				hit_miss = memory.read_cache(num_address, binary_address, "C1")
+				if hit_miss == 1: #TIVEMOS UM HIT
+					QTD_HITS += 1
+				elif hit_miss == 2: #TIVEMOS UM MISS COMPULSORIO
+					QTD_MISSES += 1
+					QTD_MISSES_COMPULSORIOS += 1
+				elif hit_miss == 3: #TIVEMOS UM MISS POR CONFLITO
+					QTD_MISSES += 1
+					QTD_MISSES_CONFLITO += 1
+		memory.print_cache()
 	elif modo_cache == "C2":#CACHE FOUR-WAY SET ASSOCIATIVE WITH 2 WORDS/BLOCK
-		pass
+		#PRIMEIRO PASSO: INICIALIZAR A CACHE
+		memory = ch.cache("C2")
+		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
+		for num_address, mode in lista_de_enderecos:
+			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
+			binary_address = np.binary_repr(num_address, 32)
+			sentence = f"Binary Address: {binary_address} ---- Decimal Address: {num_address}"
+			#MASSA, JA PASSEI O ENDERECO PARA BINARIO. HORA DE INSERIR NA CACHE...
+			if mode == 'w':
+				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
+				memory.write_cache(num_address, binary_address, "C2")
+			elif mode == 'r':
+				hit_miss = memory.read_cache(num_address, binary_address, "C2")
+				if hit_miss == 1: #TIVEMOS UM HIT
+					QTD_HITS += 1
+				elif hit_miss == 2: #TIVEMOS UM MISS COMPULSORIO
+					QTD_MISSES += 1
+					QTD_MISSES_COMPULSORIOS += 1
+				elif hit_miss == 3: #TIVEMOS UM MISS POR CONFLITO
+					QTD_MISSES += 1
+					QTD_MISSES_CONFLITO += 1
+		memory.print_cache()
 	elif modo_cache == "C3":#CACHE FOUR-WAY SET ASSOCIATIVE WITH 4 WORDS/BLOCK
-		pass
+		#PRIMEIRO PASSO: INICIALIZAR A CACHE
+		memory = ch.cache("C3")
+		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
+		for num_address, mode in lista_de_enderecos:
+			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
+			binary_address = np.binary_repr(num_address, 32)
+			sentence = f"Binary Address: {binary_address} ---- Decimal Address: {num_address}"
+			#MASSA, JA PASSEI O ENDERECO PARA BINARIO. HORA DE INSERIR NA CACHE...
+			if mode == 'w':
+				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
+				memory.write_cache(num_address, binary_address, "C3")
+			elif mode == 'r':
+				hit_miss = memory.read_cache(num_address, binary_address, "C3")
+				if hit_miss == 1: #TIVEMOS UM HIT
+					QTD_HITS += 1
+				elif hit_miss == 2: #TIVEMOS UM MISS COMPULSORIO
+					QTD_MISSES += 1
+					QTD_MISSES_COMPULSORIOS += 1
+				elif hit_miss == 3: #TIVEMOS UM MISS POR CONFLITO
+					QTD_MISSES += 1
+					QTD_MISSES_CONFLITO += 1
+		memory.print_cache()
 	elif modo_cache == "C4":#CACHE FOUR-WAY SET ASSOCIATIVE WITH 8 WORDS/BLOCK
-		pass
+		#PRIMEIRO PASSO: INICIALIZAR A CACHE
+		memory = ch.cache("C4")
+		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
+		for num_address, mode in lista_de_enderecos:
+			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
+			binary_address = np.binary_repr(num_address, 32)
+			sentence = f"Binary Address: {binary_address} ---- Decimal Address: {num_address}"
+			#MASSA, JA PASSEI O ENDERECO PARA BINARIO. HORA DE INSERIR NA CACHE...
+			if mode == 'w':
+				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
+				memory.write_cache(num_address, binary_address, "C4")
+			elif mode == 'r':
+				hit_miss = memory.read_cache(num_address, binary_address, "C4")
+				if hit_miss == 1: #TIVEMOS UM HIT
+					QTD_HITS += 1
+				elif hit_miss == 2: #TIVEMOS UM MISS COMPULSORIO
+					QTD_MISSES += 1
+					QTD_MISSES_COMPULSORIOS += 1
+				elif hit_miss == 3: #TIVEMOS UM MISS POR CONFLITO
+					QTD_MISSES += 1
+					QTD_MISSES_CONFLITO += 1
+		memory.print_cache()
 	elif modo_cache == "D1":#CACHE EIGHT-WAY SET ASSOCIATIVE WITH 1 WORDS/BLOCK
-		pass
+		#PRIMEIRO PASSO: INICIALIZAR A CACHE
+		memory = ch.cache("D1")
+		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
+		for num_address, mode in lista_de_enderecos:
+			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
+			binary_address = np.binary_repr(num_address, 32)
+			sentence = f"Binary Address: {binary_address} ---- Decimal Address: {num_address}"
+			#MASSA, JA PASSEI O ENDERECO PARA BINARIO. HORA DE INSERIR NA CACHE...
+			if mode == 'w':
+				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
+				memory.write_cache(num_address, binary_address, "D1")
+			elif mode == 'r':
+				hit_miss = memory.read_cache(num_address, binary_address, "D1")
+				if hit_miss == 1: #TIVEMOS UM HIT
+					QTD_HITS += 1
+				elif hit_miss == 2: #TIVEMOS UM MISS COMPULSORIO
+					QTD_MISSES += 1
+					QTD_MISSES_COMPULSORIOS += 1
+				elif hit_miss == 3: #TIVEMOS UM MISS POR CONFLITO
+					QTD_MISSES += 1
+					QTD_MISSES_CONFLITO += 1
+		memory.print_cache()
 	elif modo_cache == "D2":#CACHE EIGHT-WAY SET ASSOCIATIVE WITH 2 WORDS/BLOCK
-		pass
+		#PRIMEIRO PASSO: INICIALIZAR A CACHE
+		memory = ch.cache("D2")
+		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
+		for num_address, mode in lista_de_enderecos:
+			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
+			binary_address = np.binary_repr(num_address, 32)
+			sentence = f"Binary Address: {binary_address} ---- Decimal Address: {num_address}"
+			#MASSA, JA PASSEI O ENDERECO PARA BINARIO. HORA DE INSERIR NA CACHE...
+			if mode == 'w':
+				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
+				memory.write_cache(num_address, binary_address, "D2")
+			elif mode == 'r':
+				hit_miss = memory.read_cache(num_address, binary_address, "D2")
+				if hit_miss == 1: #TIVEMOS UM HIT
+					QTD_HITS += 1
+				elif hit_miss == 2: #TIVEMOS UM MISS COMPULSORIO
+					QTD_MISSES += 1
+					QTD_MISSES_COMPULSORIOS += 1
+				elif hit_miss == 3: #TIVEMOS UM MISS POR CONFLITO
+					QTD_MISSES += 1
+					QTD_MISSES_CONFLITO += 1
+		memory.print_cache()
 	elif modo_cache == "D3":#CACHE EIGHT-WAY SET ASSOCIATIVE WITH 4 WORDS/BLOCK
-		pass
+		#PRIMEIRO PASSO: INICIALIZAR A CACHE
+		memory = ch.cache("D3")
+		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
+		for num_address, mode in lista_de_enderecos:
+			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
+			binary_address = np.binary_repr(num_address, 32)
+			sentence = f"Binary Address: {binary_address} ---- Decimal Address: {num_address}"
+			#MASSA, JA PASSEI O ENDERECO PARA BINARIO. HORA DE INSERIR NA CACHE...
+			if mode == 'w':
+				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
+				memory.write_cache(num_address, binary_address, "D3")
+			elif mode == 'r':
+				hit_miss = memory.read_cache(num_address, binary_address, "D3")
+				if hit_miss == 1: #TIVEMOS UM HIT
+					QTD_HITS += 1
+				elif hit_miss == 2: #TIVEMOS UM MISS COMPULSORIO
+					QTD_MISSES += 1
+					QTD_MISSES_COMPULSORIOS += 1
+				elif hit_miss == 3: #TIVEMOS UM MISS POR CONFLITO
+					QTD_MISSES += 1
+					QTD_MISSES_CONFLITO += 1
+		memory.print_cache()
 	elif modo_cache == "D4":#CACHE EIGHT-WAY SET ASSOCIATIVE WITH 8 WORDS/BLOCK
-		pass
+		#PRIMEIRO PASSO: INICIALIZAR A CACHE
+		memory = ch.cache("D4")
+		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
+		for num_address, mode in lista_de_enderecos:
+			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
+			binary_address = np.binary_repr(num_address, 32)
+			sentence = f"Binary Address: {binary_address} ---- Decimal Address: {num_address}"
+			#MASSA, JA PASSEI O ENDERECO PARA BINARIO. HORA DE INSERIR NA CACHE...
+			if mode == 'w':
+				#MODO ESCRITA: SO TEM QUE JOGAR NA CACHE
+				memory.write_cache(num_address, binary_address, "D4")
+			elif mode == 'r':
+				hit_miss = memory.read_cache(num_address, binary_address, "D4")
+				if hit_miss == 1: #TIVEMOS UM HIT
+					QTD_HITS += 1
+				elif hit_miss == 2: #TIVEMOS UM MISS COMPULSORIO
+					QTD_MISSES += 1
+					QTD_MISSES_COMPULSORIOS += 1
+				elif hit_miss == 3: #TIVEMOS UM MISS POR CONFLITO
+					QTD_MISSES += 1
+					QTD_MISSES_CONFLITO += 1
+		memory.print_cache()
 	else:
 		print("O modo de cache inserido nao eh valido.")'''
 
