@@ -19,8 +19,7 @@ class Block():
 			self.tag_hex = None
 			self.word1 = None
 			self.word2 = None
-			self.block_offset = None
-		#BLOCK WITH 3 WORDS PER BLOCK
+		#BLOCK WITH 4 WORDS PER BLOCK
 		elif tipo == 'A3':
 			self.index_binary = None
 			self.valid_bit = 0
@@ -31,7 +30,7 @@ class Block():
 			self.word2 = None
 			self.word3 = None
 			self.word4 = None
-		#BLOCK WITH 4 WORDS PER BLOCK
+		#BLOCK WITH 8 WORDS PER BLOCK
 		elif tipo == 'A4':
 			self.index_binary = None
 			self.valid_bit = 0
@@ -50,7 +49,71 @@ class Block():
 
 class Set:
 	def __init__(self, tipo):
-		pass
+		if tipo == 'B1':
+			#TWO-WAY ASSOCIATIVE: 1 WORD/BLOCK
+			self.fifo = []
+			self.livre = 0
+			self.bloco1 = Block('A1')
+			self.bloco2 = Block('A1')
+		elif tipo == 'B2':
+			#TWO-WAY ASSOCIATIVE: 2 WORDS/BLOCK
+			self.fifo = []
+			self.livre = 0
+			self.bloco1 = Block('A2')
+			self.bloco2 = Block('A2')
+		elif tipo == 'B3':
+			#TWO-WAY ASSOCIATIVE: 4 WORDS/BLOCK
+			self.fifo = []
+			self.livre = 0
+			self.bloco1 = Block('A3')
+			self.bloco2 = Block('A3')
+		elif tipo == 'B4':
+			#TWO-WAY ASSOCIATIVE: 8 WORDS/BLOCK
+			self.fifo = []
+			self.livre = 0
+			self.bloco1 = Block('A4')
+			self.bloco2 = Block('A4')
+		elif tipo == 'C1':
+			#FOUR-WAY ASSOCIATIVE: 1 WORD/BLOCK
+			self.fifo = []
+			self.livre = 0
+			self.bloco1 = Block('A1')
+			self.bloco2 = Block('A1')
+			self.bloco3 = Block('A1')
+			self.bloco4 = Block('A1')
+		elif tipo == 'C2':
+			#FOUR-WAY ASSOCIATIVE: 2 WORDS/BLOCK
+			self.fifo = []
+			self.livre = 0
+			self.bloco1 = Block('A2')
+			self.bloco2 = Block('A2')
+			self.bloco3 = Block('A2')
+			self.bloco4 = Block('A2')
+		elif tipo == 'C3':
+			#FOUR-WAY ASSOCIATIVE: 4 WORDS/BLOCK
+			self.fifo = []
+			self.livre = 0
+			self.bloco1 = Block('A3')
+			self.bloco2 = Block('A3')
+			self.bloco3 = Block('A3')
+			self.bloco4 = Block('A3')
+		elif tipo == 'C4':
+			#FOUR-WAY ASSOCIATIVE: 8 WORDS/BLOCK
+			self.fifo = []
+			self.livre = 0
+			self.bloco1 = Block('A4')
+			self.bloco2 = Block('A4')
+			self.bloco3 = Block('A4')
+			self.bloco4 = Block('A4')
+		elif tipo == 'D1':
+			#FULLY ASSOCIATIVE: VAI TER QUE SER DE OUTRO JEITO...
+		elif tipo == 'D2':
+			#FULLY ASSOCIATIVE: VAI TER QUE SER DE OUTRO JEITO...
+		elif tipo == 'D3':
+			#FULLY ASSOCIATIVE: VAI TER QUE SER DE OUTRO JEITO...
+		elif tipo == 'D4':
+			#FULLY ASSOCIATIVE: VAI TER QUE SER DE OUTRO JEITO...
+		
 	
 
 
@@ -60,6 +123,7 @@ class Cache:
 		if tipo == 'A1':
 			self.tipo = 'A1'
 			self.numero_indices = 1024 #range (0 ate 1023)
+			self.numero_sets = None
 			self.table = []
 			for element in range(0, 1024):
 				bloco = Block("A1")
@@ -68,6 +132,7 @@ class Cache:
 		elif tipo == 'A2':
 			self.tipo = 'A2'
 			self.numero_indices = 512  #range(0 a 511)
+			self.numero_sets = None
 			self.table = []
 			for element in range(0, 512):
 				bloco = Block("A2")
@@ -76,6 +141,7 @@ class Cache:
 		elif tipo == 'A3':
 			self.tipo = 'A3'
 			self.numero_indices = 256  #range(0 a 255)
+			self.numero_sets = None
 			self.table = []
 			for element in range(0, 256):
 				bloco = Block("A3")
@@ -84,35 +150,124 @@ class Cache:
 		elif tipo == 'A4':
 			self.tipo = 'A4'
 			self.numero_indices = 128  #range(0 a 127)
+			self.numero_sets = None
 			self.table = []
 			for element in range(0, 128):
 				bloco = Block("A4")
 				self.table.append(bloco)
+		#Two-Way Set Associative: 1 word per block
 		elif tipo == 'B1':
 			self.tipo = 'B1'
+			self.numero_indices = None
+			self.numero_sets = 512
+			self.table = []
+			for element in range(0, 512):
+				novo_set = Set('B1')
+				self.table.append(novo_set)
+		#Two-Way Set Associative: 2 words per block
 		elif tipo == 'B2':
 			self.tipo = 'B2'
+			self.numero_indices = None
+			self.numero_sets = 256
+			self.table = []
+			for element in range(0, 256):
+				novo_set = Set('B2')
+				self.table.append(novo_set)
+		#Two-Way Set Associative: 4 words per block
 		elif tipo == 'B3':
 			self.tipo = 'B3'
+			self.numero_indices = None
+			self.numero_sets = 128
+			self.table = []
+			for element in range(0, 128):
+				novo_set = Set('B3')
+				self.table.append(novo_set)
+		#Two-Way Set Associative: 8 words per block
 		elif tipo == 'B4':
 			self.tipo = 'B4'
+			self.numero_indices = None
+			self.numero_sets = 64
+			self.table = []
+			for element in range(0. 64):
+				novo_set = Set('B4')
+				self.table.append(novo_set)
+		#Four-Way Set Associaive: 1 word per block
 		elif tipo == 'C1':
 			self.tipo = 'C1'
+			self.numero_indices = None
+			self.numero_sets = 256
+			self.table = []
+			for element in range(0, 256):
+				novo_set = Set('C1')
+				self.table.append(novo_set)
+		#Four-Way Set Associative: 2 words per block
 		elif tipo == 'C2':
 			self.tipo = 'C2'
+			self.numero_indices = None
+			self.numero_sets = 128
+			self.table = []
+			for element in range(0, 128):
+				novo_set = Set('C2')
+				self.table.append(novo_set)
+		#Four-Way Set Associative: 4 words per block
 		elif tipo == 'C3':
 			self.tipo = 'C3'
+			self.numero_indices = None
+			self.numero_sets = 64
+			self.table = []
+			for element in range(0, 64):
+				novo_set = Set('C3')
+				self.table.append(novo_set)
+		#Four-Way Set Associative: 8 words per block
 		elif tipo == 'C4':
 			self.tipo = 'C4'
+			self.numero_indices = None
+			self.numero_sets = 32
+			self.table = []
+			for element in range(0, 32):
+				novo_set = Set('C4')
+				self.table.append(novo_set)
+		#AQUI AS COISAS DA IMPLEMENTACAO MUDARAM UM POUCO... PELO MENOS EM RELACAO AOS OUTROS SET ASSOCIATIVE
+		#Fully Associative: 1 word per block
 		elif tipo == 'D1':
 			self.tipo = 'D1'
+			self.numero_indices = 1024
+			self.numero_sets = 1
+			self.table = []
+			self.free = 0
+			for element in range(0, 1024):
+				bloco = Block("A1")
+				self.table.append(bloco)
+		#Fully Associative: 2 words per block
 		elif tipo == 'D2':
 			self.tipo = 'D2'
+			self.numero_indices =  512
+			self.numero_sets = 1
+			self.table = []
+			self.free = 0
+			for element in range(0, 512):
+				bloco = Block("A2")
+				self.table.append(bloco)
+		#Fully Associative: 4 words per block
 		elif tipo == 'D3':
 			self.tipo = 'D3'
+			self.numero_indices = 256
+			self.numero_sets = 1
+			self.table = []
+			self.free = 0
+			for element in range(0, 256):
+				bloco = Block("A3")
+				self.table.append(bloco)
+		#Fully Associative: 8 words per block
 		elif tipo == 'D4':
 			self.tipo = 'D4'
-		
+			self.numero_indices = 128
+			self.numero_sets = 1
+			self.table = []
+			self.free = 0
+			for element in range(0, 128):
+				bloco = Bloco("A4")
+				self.table.append(bloco)
 
 	def print_cache(self):
 		if self.tipo == 'A1':
