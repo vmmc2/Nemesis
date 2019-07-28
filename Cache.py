@@ -447,13 +447,308 @@ class Cache:
 				self.table[i].word7 = None
 				self.table[i].word8 = num_address
 		elif tipo_cache == 'B1':
-			pass
+			#TWO-WAY SET ASSOCIATIVE: 1 WORD/BLOCK
+			######################################################
+			##          CONFIGURACAO DO ENDERECO 32 BITS        ##
+			##    TAG                 SET           SET OFFSET  ##   
+			##  22 BITS             O9 BITS           01 BIT    ##
+			######################################################
+			'''def write_cache(self, num_address, binary_address, tipo_cache):'''
+			i = int(binary_address[22:31], 2) #SET NO FORMATO DECIMAL
+			tag_dada_bin = binary_address[0:22] #pegando a tag que foi dada
+			dado = int(num_address) #dado a ser escrito na forma decimal
+			set_offset = binary_address[-1] #bit que indica o set offset
+			if self.table[i].livre == 0: #SE TODOS OS BLOCOS DAQUELE SET TAVAM LIVRES... EU COMECO ESCREVENDO PELO PRIMEIRO BLOCO....
+				self.table[i].bloco1.word1 = dado
+				self.table[i].bloco1.tag_bin  = tag_dada_bin
+				self.table[i].bloco1.valid_bit = 1
+				self.table[i].livre += 1
+				self.table[i].fifo.append(1)
+			elif self.table[i].livre == 1:#SE O PRIMEIRO BLOCO DAQUELE SET TAVA OCUPADO... EU COMECO ESCREVENDO PELO SEGUNDO BLOCO....
+				self.table[i].bloco2.word1 = dado
+				self.table[i].bloco2.tag_bin = tag_dada_bin
+				self.table[i].bloco2.valid_bit = 1
+				self.table[i].livre += 1				
+				self.table[i].fifo.append(2)
+			elif self.table[i].livre  >= 2: #se TODOS OS BLOCOS DAQUELE SET ESTAVAM OCUPADOS EU PEGO O QUE FOI USADO HA MAIS TEMPO DE ACORDO COM A FIFO....
+				usado_ha_mais_tempo = self.table[i].fifo[0]
+				self.table[i].fifo.pop(0)
+				if usado_ha_mais_tempo == 1: #TEM QUE SOBRESCREVER O BLOCO 1
+					self.table[i].bloco1.word1 = dado
+					self.table[i].bloco1.tag_bin  = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].fifo.append(1)
+				elif usado_ha_mais_tempo == 2: #TEM QUE SOBRESCREVER O BLOCO 2
+					self.table[i].bloco2.word1 = dado
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1				
+					self.table[i].fifo.append(2)
 		elif tipo_cache == 'B2':
-			pass
+			#TWO-WAY SET ASSOCIATIVE: 2 WORDs/BLOCK
+			######################################################
+			##          CONFIGURACAO DO ENDERECO 32 BITS        ##
+			##    TAG                 SET           SET OFFSET  ##   
+			##  22 BITS             O8 BITS          02 BITS    ##
+			######################################################
+			'''def write_cache(self, num_address, binary_address, tipo_cache):'''
+			i = int(binary_address[22:30], 2) #SET NO FORMATO DECIMAL
+			tag_dada_bin = binary_address[0:22]
+			dado = int(num_address)
+			set_offset = binary_address[-2:]
+			if self.table[i].livre == 0: #COMECA ESCREVENDO NO PRIMEIRO BLOCO
+				if num_address % 2 == 0:
+					#DADO VAI PARA WORD1
+					self.table[i].bloco1.word1 = dado
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+				elif num_address % 2 == 1:
+					#DADO VAI PARA WORD2
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = dado
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+			elif self.table[i].livre == 1: #ESCREVE NO SEGUNDO BLOCO
+				if num_address % 2 == 0:
+					#DADO VAI PARA WORD1
+					self.table[i].bloco2.word1 = dado
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(2)
+				elif num_address % 2 == 1:
+					#DADO VAI PARA WORD2
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = dado
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(2)
+			elif self.table[i].livre >= 2: #ESCREVE NO BLOCO QUE FOI USADO HA MAIS TEMPO
+				usado_ha_mais_tempo = self.table[i].fifo[0]
+				self.table[i].fifo.pop(0)
+				if usado_ha_mais_tempo == 1: #TEM QUE SOBRESCREVER O BLOCO 1
+					if num_address % 2 == 0:
+						#DADO VAI PARA WORD1
+						self.table[i].bloco1.word1 = dado
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].fifo.append(1)
+					elif num_address % 2 == 1:
+						#DADO VAI PARA WORD2
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = dado
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].fifo.append(1)
+				elif usado_ha_mais_tempo == 2: #TEM QUE SOBRESCREVER O BLOCO 2
+					if num_address % 2 == 0:
+						#DADO VAI PARA WORD1
+						self.table[i].bloco2.word1 = dado
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].fifo.append(2)
+					elif num_address % 2 == 1:
+						#DADO VAI PARA WORD2
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = dado
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].fifo.append(2)
 		elif tipo_cache == 'B3':
-			pass
+			#TWO-WAY SET ASSOCIATIVE: 4 WORDs/BLOCK
+			######################################################
+			##          CONFIGURACAO DO ENDERECO 32 BITS        ##
+			##    TAG                 SET           SET OFFSET  ##   
+			##  22 BITS             O7 BITS          03 BITS    ##
+			######################################################
+			'''def write_cache(self, num_address, binary_address, tipo_cache):'''
+			i = int(binary_address[22:29], 2)
+			tag_dada_bin = binary_address[0:22]
+			dado = int(num_address)
+			set_offset = binary_address[-3:]
+			if self.table[i].livre == 0: #COMECA ESCREVENDO NO PRIMEIRO BLOCO
+				if num_address % 4 == 0:
+					#DADO VAI PARA WORD1
+					self.table[i].bloco1.word1 = dado
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+				elif num_address % 4 == 1:
+					#DADO VAI PARA WORD2
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = dado
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+				elif num_address % 4== 2:
+					#DADO VAI PARA WORD3
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = dado
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+				elif num_address % 4 == 3:
+					#DADO VAI PARA WORD4
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = dado
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+			elif self.table[i].livre == 1:#COMECA ESCREVENDO NO SEGUNDO BLOCO
+				if num_address % 4 == 0:
+					#DADO VAI PARA WORD1
+					self.table[i].bloco2.word1 = dado
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(2)
+				elif num_address % 4 == 1:
+					#DADO VAI PARA WORD2
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = dado
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(2)
+				elif num_address % 4 == 2:
+					#DADO VAI PARA WORD3
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = dado
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(2)
+				elif num_address % 4 == 3:
+					#DADO VAI PARA WORD4
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = dado
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(2)
+			elif self.table[i].livre >= 2:#ESCREVE NO BLOCO QUE FOI USADO HA MAIS TEMPO
+				usado_ha_mais_tempo = self.table[i].fifo[0]
+				self.table[i].fifo.pop(0)
+				if usado_ha_mais_tempo == 1: #TEM QUE SOBRESCREVER O BLOCO 1
+					if num_address % 4 == 0:
+					#DADO VAI PARA WORD1
+						self.table[i].bloco1.word1 = dado
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(1)
+					elif num_address % 4 == 1:
+						#DADO VAI PARA WORD2
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = dado
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(1)
+					elif num_address % 4== 2:
+						#DADO VAI PARA WORD3
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = dado
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(1)
+					elif num_address % 4 == 3:
+						#DADO VAI PARA WORD4
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = dado
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(1)
+				elif usado_ha_mais_tempo == 2: #TEM QUE SOBRESCREVER O BLOCO 2
+					if num_address % 4 == 0:
+						#DADO VAI PARA WORD1
+						self.table[i].bloco2.word1 = dado
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(2)
+					elif num_address % 4 == 1:
+						#DADO VAI PARA WORD2
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = dado
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(2)
+					elif num_address % 4 == 2:
+						#DADO VAI PARA WORD3
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = dado
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(2)
+					elif num_address % 4 == 3:
+						#DADO VAI PARA WORD4
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = dado
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(2)
 		elif tipo_cache == 'B4':
-			pass
+			#TWO-WAY SET ASSOCIATIVE: 8 WORDs/BLOCK
+			######################################################
+			##          CONFIGURACAO DO ENDERECO 32 BITS        ##
+			##    TAG                 SET           SET OFFSET  ##   
+			##  22 BITS             O6 BITS          04 BITS    ##
+			######################################################
+			'''def write_cache(self, num_address, binary_address, tipo_cache):'''
 		elif tipo_cache == 'C1':
 			pass
 		elif tipo_cache == 'C2':
