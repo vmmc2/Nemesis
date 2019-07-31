@@ -580,7 +580,7 @@ class Cache:
 					self.table[i].bloco1.word1 = dado
 					self.table[i].bloco1.word2 = None
 					self.table[i].bloco1.word3 = None
-					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = None
 					self.table[i].bloco1.tag_bin = tag_dada_bin
 					self.table[i].bloco1.valid_bit = 1
 					self.table[i].livre += 1
@@ -665,7 +665,7 @@ class Cache:
 						self.table[i].bloco1.word1 = dado
 						self.table[i].bloco1.word2 = None
 						self.table[i].bloco1.word3 = None
-						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = None
 						self.table[i].bloco1.tag_bin = tag_dada_bin
 						self.table[i].bloco1.valid_bit = 1
 						self.table[i].livre += 1
@@ -749,14 +749,1736 @@ class Cache:
 			##  22 BITS             O6 BITS          04 BITS    ##
 			######################################################
 			'''def write_cache(self, num_address, binary_address, tipo_cache):'''
+			i = int(binary_address[22:28], 2)
+			tag_dada_bin = binary_address[0:22]
+			dado = int(num_address)
+			set_offset = binary_address[-4:]
+			if self.table[i].livre == 0 #O PRIMEIRO BLOCO DESSE SET TA LIVRE
+				if num_address % 8 == 0:
+					#DADO VAI PARA WORD1
+					self.table[i].bloco1.word1 = dado
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.word5 = None
+					self.table[i].bloco1.word6 = None
+					self.table[i].bloco1.word7 = None
+					self.table[i].bloco1.word8 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+				elif num_address % 8 == 1:
+					#DADO VAI PARA WORD2
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = dado
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.word5 = None
+					self.table[i].bloco1.word6 = None
+					self.table[i].bloco1.word7 = None
+					self.table[i].bloco1.word8 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+				elif num_address % 8== 2:
+					#DADO VAI PARA WORD3
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = dado
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.word5 = None
+					self.table[i].bloco1.word6 = None
+					self.table[i].bloco1.word7 = None
+					self.table[i].bloco1.word8 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+				elif num_address % 8 == 3:
+					#DADO VAI PARA WORD4
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = dado
+					self.table[i].bloco1.word5 = None
+					self.table[i].bloco1.word6 = None
+					self.table[i].bloco1.word7 = None
+					self.table[i].bloco1.word8 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+				elif num_address % 8 == 4:
+					#DADO VAI PARA WORD5
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.word5 = dado
+					self.table[i].bloco1.word6 = None
+					self.table[i].bloco1.word7 = None
+					self.table[i].bloco1.word8 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+				elif num_address % 8 == 5:
+					#DADO VAI PARA WORD6
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.word5 = None
+					self.table[i].bloco1.word6 = dado
+					self.table[i].bloco1.word7 = None
+					self.table[i].bloco1.word8 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+				elif num_address % 8 == 6:
+					#DADO VAI PARA WORD7
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.word5 = None
+					self.table[i].bloco1.word6 = None
+					self.table[i].bloco1.word7 = dado
+					self.table[i].bloco1.word8 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+				elif num_address % 8 == 7:
+					#DADO VAI PARA WORD8
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.word5 = None
+					self.table[i].bloco1.word6 = None
+					self.table[i].bloco1.word7 = None
+					self.table[i].bloco1.word8 = dado
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+			elif self.table[i].livre == 1: #TEM QUE JOGAR NO SEGUNDO BLOCO AGR...
+				if num_address % 8 == 0:
+					#DADO VAI PARA WORD1
+					self.table[i].bloco2.word1 = dado
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.word5 = None
+					self.table[i].bloco2.word6 = None
+					self.table[i].bloco2.word7 = None
+					self.table[i].bloco2.word8 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(2)
+				elif num_address % 8 == 1:
+					#DADO VAI PARA WORD2
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = dado
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.word5 = None
+					self.table[i].bloco2.word6 = None
+					self.table[i].bloco2.word7 = None
+					self.table[i].bloco2.word8 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(2)
+				elif num_address % 8== 2:
+					#DADO VAI PARA WORD3
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = dado
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.word5 = None
+					self.table[i].bloco2.word6 = None
+					self.table[i].bloco2.word7 = None
+					self.table[i].bloco2.word8 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(2)
+				elif num_address % 8 == 3:
+					#DADO VAI PARA WORD4
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = dado
+					self.table[i].bloco2.word5 = None
+					self.table[i].bloco2.word6 = None
+					self.table[i].bloco2.word7 = None
+					self.table[i].bloco2.word8 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(2)
+				elif num_address % 8 == 4:
+					#DADO VAI PARA WORD5
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.word5 = dado
+					self.table[i].bloco2.word6 = None
+					self.table[i].bloco2.word7 = None
+					self.table[i].bloco2.word8 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(2)
+				elif num_address % 8 == 5:
+					#DADO VAI PARA WORD6
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.word5 = None
+					self.table[i].bloco2.word6 = dado
+					self.table[i].bloco2.word7 = None
+					self.table[i].bloco2.word8 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(2)
+				elif num_address % 8 == 6:
+					#DADO VAI PARA WORD7
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.word5 = None
+					self.table[i].bloco2.word6 = None
+					self.table[i].bloco2.word7 = dado
+					self.table[i].bloco2.word8 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(2)
+				elif num_address % 8 == 7:
+					#DADO VAI PARA WORD8
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.word5 = None
+					self.table[i].bloco2.word6 = None
+					self.table[i].bloco2.word7 = None
+					self.table[i].bloco2.word8 = dado
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(2)
+			elif self.table[i].livre >= 2: #OS DOIS BLOCOS TAO CHEIOS.... TEM QUE USAR UM DOS DOIS...
+				usado_ha_mais_tempo = self.table[i].fifo[0]
+				self.table[i].fifo.pop(0)
+				if usado_ha_mais_tempo == 1: #TEM QUE SOBRESCREVER O BLOCO 1
+					if num_address % 8 == 0:
+						#DADO VAI PARA WORD1
+						self.table[i].bloco1.word1 = dado
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.word5 = None
+						self.table[i].bloco1.word6 = None
+						self.table[i].bloco1.word7 = None
+						self.table[i].bloco1.word8 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(1)
+					elif num_address % 8 == 1:
+						#DADO VAI PARA WORD2
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = dado
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.word5 = None
+						self.table[i].bloco1.word6 = None
+						self.table[i].bloco1.word7 = None
+						self.table[i].bloco1.word8 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(1)
+					elif num_address % 8== 2:
+						#DADO VAI PARA WORD3
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = dado
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.word5 = None
+						self.table[i].bloco1.word6 = None
+						self.table[i].bloco1.word7 = None
+						self.table[i].bloco1.word8 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(1)
+					elif num_address % 8 == 3:
+						#DADO VAI PARA WORD4
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = dado
+						self.table[i].bloco1.word5 = None
+						self.table[i].bloco1.word6 = None
+						self.table[i].bloco1.word7 = None
+						self.table[i].bloco1.word8 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(1)
+					elif num_address % 8 == 4:
+						#DADO VAI PARA WORD5
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.word5 = dado
+						self.table[i].bloco1.word6 = None
+						self.table[i].bloco1.word7 = None
+						self.table[i].bloco1.word8 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(1)
+					elif num_address % 8 == 5:
+						#DADO VAI PARA WORD6
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.word5 = None
+						self.table[i].bloco1.word6 = dado
+						self.table[i].bloco1.word7 = None
+						self.table[i].bloco1.word8 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(1)
+					elif num_address % 8 == 6:
+						#DADO VAI PARA WORD7
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.word5 = None
+						self.table[i].bloco1.word6 = None
+						self.table[i].bloco1.word7 = dado
+						self.table[i].bloco1.word8 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(1)
+					elif num_address % 8 == 7:
+						#DADO VAI PARA WORD8
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.word5 = None
+						self.table[i].bloco1.word6 = None
+						self.table[i].bloco1.word7 = None
+						self.table[i].bloco1.word8 = dado
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(1)
+				elif usado_ha_mais_tempo == 2: #TEM QUE SOBRESCREVER O BLOCO 2
+					if num_address % 8 == 0:
+						#DADO VAI PARA WORD1
+						self.table[i].bloco2.word1 = dado
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.word5 = None
+						self.table[i].bloco2.word6 = None
+						self.table[i].bloco2.word7 = None
+						self.table[i].bloco2.word8 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(2)
+					elif num_address % 8 == 1:
+						#DADO VAI PARA WORD2
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = dado
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.word5 = None
+						self.table[i].bloco2.word6 = None
+						self.table[i].bloco2.word7 = None
+						self.table[i].bloco2.word8 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(2)
+					elif num_address % 8== 2:
+						#DADO VAI PARA WORD3
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = dado
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.word5 = None
+						self.table[i].bloco2.word6 = None
+						self.table[i].bloco2.word7 = None
+						self.table[i].bloco2.word8 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(2)
+					elif num_address % 8 == 3:
+						#DADO VAI PARA WORD4
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = dado
+						self.table[i].bloco2.word5 = None
+						self.table[i].bloco2.word6 = None
+						self.table[i].bloco2.word7 = None
+						self.table[i].bloco2.word8 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(2)
+					elif num_address % 8 == 4:
+						#DADO VAI PARA WORD5
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.word5 = dado
+						self.table[i].bloco2.word6 = None
+						self.table[i].bloco2.word7 = None
+						self.table[i].bloco2.word8 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(2)
+					elif num_address % 8 == 5:
+						#DADO VAI PARA WORD6
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.word5 = None
+						self.table[i].bloco2.word6 = dado
+						self.table[i].bloco2.word7 = None
+						self.table[i].bloco2.word8 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(2)
+					elif num_address % 8 == 6:
+						#DADO VAI PARA WORD7
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.word5 = None
+						self.table[i].bloco2.word6 = None
+						self.table[i].bloco2.word7 = dado
+						self.table[i].bloco2.word8 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(2)
+					elif num_address % 8 == 7:
+						#DADO VAI PARA WORD8
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.word5 = None
+						self.table[i].bloco2.word6 = None
+						self.table[i].bloco2.word7 = None
+						self.table[i].bloco2.word8 = dado
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(2)
 		elif tipo_cache == 'C1':
-			pass
+			#FOUR-WAY SET ASSOCIATIVE WITH 1 WORD/BLOCK
+			######################################################
+			##          CONFIGURACAO DO ENDERECO 32 BITS        ##
+			##    TAG                 SET           SET OFFSET  ##   
+			##  22 BITS             O8 BITS          02 BITS    ##
+			######################################################
+			i = int(binary_address[22:30], 2)
+			tag_dada_bin = binary_address[0:22]
+			dado = int(num_address)
+			set_offset = binary_address[-2:]
+			if self.table[i].livre == 0: #VAI PRO BLOCO 1
+				self.table[i].bloco1.word1 = dado
+				self.table[i].bloco1.tag_bin = tag_dada_bin
+				self.table[i].bloco1.valid_bit = 1
+				self.table[i].livre += 1
+				self.table[i].fifo.append(1)
+			elif self.table[i].livre == 1: #VAI PRO BLOCO 2
+				self.table[i].bloco2.word1 = dado
+				self.table[i].bloco2.tag_bin = tag_dada_bin
+				self.table[i].bloco2.valid_bit = 1
+				self.table[i].livre += 1
+				self.table[i].fifo.append(2)
+			elif self.table[i].livre == 2: #VAI PRO BLOCO 3
+				self.table[i].bloco3.word1 = dado
+				self.table[i].bloco3.tag_bin = tag_dada_bin
+				self.table[i].bloco3.valid_bit = 1
+				self.table[i].livre += 1
+				self.table[i].fifo.append(3)
+			elif self.table[i].livre == 3: #VAI PRO BLOCO 4
+				self.table[i].bloco4.word1 = dado
+				self.table[i].bloco4.tag_bin = tag_dada_bin
+				self.table[i].bloco4.valid_bit = 1
+				self.table[i].livre += 1
+				self.table[i].fifo.append(4)
+			elif self.table[i].livre >= 4: #TEM QUE CHECAR A FIFO PRA VER QUAL SERA SUBSTITUIDO.
+				usado_ha_mais_tempo = self.table[i].fifo[0]
+				self.table[i].fifo.pop(0)
+				if usado_ha_mais_tempo == 1: #SOBRESCREVE BLOCO 1
+					self.table[i].bloco1.word1 = dado
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+				elif usado_ha_mais_tempo == 2: #SOBRESCREVE BLOCO 2
+					self.table[i].bloco2.word1 = dado
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(2)
+				elif usado_ha_mais_tempo == 3: #SOBRESCREVE BLOCO 3
+					self.table[i].bloco3.word1 = dado
+					self.table[i].bloco3.tag_bin = tag_dada_bin
+					self.table[i].bloco3.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(3)
+				elif usado_ha_mais_tempo == 4: #SOBRESCREVE BLOCO 4
+					self.table[i].bloco4.word1 = dado
+					self.table[i].bloco4.tag_bin = tag_dada_bin
+					self.table[i].bloco4.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(4)
 		elif tipo_cache == 'C2':
-			pass
+			#FOUR-WAY SET ASSOCIATIVE WITH 2 WORD/BLOCK
+			######################################################
+			##          CONFIGURACAO DO ENDERECO 32 BITS        ##
+			##    TAG                 SET           SET OFFSET  ##   
+			##  22 BITS             O7 BITS          03 BITS    ##
+			######################################################
+			i = int(num_address[22:29], 2)
+			tag_dada_bin = binary_address[0:22]
+			dado = int(num_address)
+			if self.table[i].livre == 0: #BLOCO 1
+				if num_address % 2 == 0:############# word 1 ############
+					self.table[i].bloco1.word1 = dado
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 2 == 1:############# word 2 ############
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = dado
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+				self.table[i].fifo.append(1)
+			elif self.table[i].livre == 1: #BLOCO 2
+				if num_address % 2 == 0:############# word 1 ############
+					self.table[i].bloco2.word1 = dado
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 2 == 1:############# word 2 ############
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = dado
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+				self.table[i].fifo.append(2)
+			elif self.table[i].livre == 2: #BLOCO 3
+				if num_address % 2 == 0:############# word 1 ############
+					self.table[i].bloco3.word1 = dado
+					self.table[i].bloco3.word2 = None
+					self.table[i].bloco3.tag_bin = tag_dada_bin
+					self.table[i].bloco3.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 2 == 1:############# word 2 ############
+					self.table[i].bloco3.word1 = None
+					self.table[i].bloco3.word2 = dado
+					self.table[i].bloco3.tag_bin = tag_dada_bin
+					self.table[i].bloco3.valid_bit = 1
+					self.table[i].livre += 1
+				self.table[i].fifo.append(3)
+			elif self.table[i].livre == 3: #BLOCO 4
+				if num_address % 2 == 0:############# word 1 ############
+					self.table[i].bloco4.word1 = dado
+					self.table[i].bloco4.word2 = None
+					self.table[i].bloco4.tag_bin = tag_dada_bin
+					self.table[i].bloco4.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 2 == 1:############# word 2 ############
+					self.table[i].bloco4.word1 = None
+					self.table[i].bloco4.word2 = dado
+					self.table[i].bloco4.tag_bin = tag_dada_bin
+					self.table[i].bloco4.valid_bit = 1
+					self.table[i].livre += 1
+				self.table[i].fifo.append(4)
+			elif self.table[i].livre >= 4: #CHECA O FIFO
+				usado_ha_mais_tempo = self.table[i].fifo[0]
+				self.table[i].fifo.pop(0)
+				if usado_ha_mais_tempo == 1: #SOBRESCREVE O BLOCO 1
+					if num_address % 2 == 0:############# word 1 ############
+						self.table[i].bloco1.word1 = dado
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 2 == 1:############# word 2 ############
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = dado
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+				elif usado_ha_mais_tempo == 2: #SOBRESCREVE O BLOCO 2
+					if num_address % 2 == 0:############# word 1 ############
+						self.table[i].bloco2.word1 = dado
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 2 == 1:############# word 2 ############
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = dado
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+					self.table[i].fifo.append(2)
+				elif usado_ha_mais_tempo == 3: #SOBRESCREVE O BLOCO 3
+					if num_address % 2 == 0:############# word 1 ############
+						self.table[i].bloco3.word1 = dado
+						self.table[i].bloco3.word2 = None
+						self.table[i].bloco3.tag_bin = tag_dada_bin
+						self.table[i].bloco3.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 2 == 1:############# word 2 ############
+						self.table[i].bloco3.word1 = None
+						self.table[i].bloco3.word2 = dado
+						self.table[i].bloco3.tag_bin = tag_dada_bin
+						self.table[i].bloco3.valid_bit = 1
+						self.table[i].livre += 1
+					self.table[i].fifo.append(3)
+				elif usado_ha_mais_tempo == 4: #SOBRESCREVE O BLOCO 4
+					if num_address % 2 == 0:############# word 1 ############
+						self.table[i].bloco4.word1 = dado
+						self.table[i].bloco4.word2 = None
+						self.table[i].bloco4.tag_bin = tag_dada_bin
+						self.table[i].bloco4.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 2 == 1:############# word 2 ############
+						self.table[i].bloco4.word1 = None
+						self.table[i].bloco4.word2 = dado
+						self.table[i].bloco4.tag_bin = tag_dada_bin
+						self.table[i].bloco4.valid_bit = 1
+						self.table[i].livre += 1
+					self.table[i].fifo.append(4)
 		elif tipo_cache == 'C3':
-			pass
+			#FOUR-WAY SET ASSOCIATIVE WITH 4 WORD/BLOCK
+			######################################################
+			##          CONFIGURACAO DO ENDERECO 32 BITS        ##
+			##    TAG                 SET           SET OFFSET  ##   
+			##  22 BITS             O6 BITS          04 BITS    ##
+			######################################################
+			i = num(binary_address[22:28], 2)
+			tag_dada_bin = binary_address[0:22]
+			dado = int(num_address)
+			set_offset = binary_address[-4:]
+			if self.table[i].livre == 0: #BLOCO 01
+				if num_address % 4 == 0:############# word 1 ############
+					self.table[i].bloco1.word1 = dado
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 4 == 1:############# word 2 ############
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = dado
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 4 == 2:############# word 3 ############
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = dado
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 4 == 3:############# word 4 ############
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = dado
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+				self.table[i].fifo.append(1)
+			elif self.table[i].livre == 1: #BLOCO 02
+				if num_address % 4 == 0:############# word 1 ############
+					self.table[i].bloco2.word1 = dado
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 4 == 1:############# word 2 ############
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = dado
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 4 == 2:############# word 3 ############
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = dado
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 4 == 3:############# word 4 ############
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = dado
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+				self.table[i].fifo.append(2)
+			elif self.table[i].livre == 2: #BLOCO 03
+				if num_address % 4 == 0:############# word 1 ############
+					self.table[i].bloco3.word1 = dado
+					self.table[i].bloco3.word2 = None
+					self.table[i].bloco3.word3 = None
+					self.table[i].bloco3.word4 = None
+					self.table[i].bloco3.tag_bin = tag_dada_bin
+					self.table[i].bloco3.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 4 == 1:############# word 2 ############
+					self.table[i].bloco3.word1 = None
+					self.table[i].bloco3.word2 = dado
+					self.table[i].bloco3.word3 = None
+					self.table[i].bloco3.word4 = None
+					self.table[i].bloco3.tag_bin = tag_dada_bin
+					self.table[i].bloco3.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 4 == 2:############# word 3 ############
+					self.table[i].bloco3.word1 = None
+					self.table[i].bloco3.word2 = None
+					self.table[i].bloco3.word3 = dado
+					self.table[i].bloco3.word4 = None
+					self.table[i].bloco3.tag_bin = tag_dada_bin
+					self.table[i].bloco3.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 4 == 3:############# word 4 ############
+					self.table[i].bloco3.word1 = None
+					self.table[i].bloco3.word2 = None
+					self.table[i].bloco3.word3 = None
+					self.table[i].bloco3.word4 = dado
+					self.table[i].bloco3.tag_bin = tag_dada_bin
+					self.table[i].bloco3.valid_bit = 1
+					self.table[i].livre += 1
+				self.table[i].fifo.append(3)
+			elif self.table[i].livre == 3: #BLOCO 04
+				if num_address % 4 == 0:############# word 1 ############
+					self.table[i].bloco4.word1 = dado
+					self.table[i].bloco4.word2 = None
+					self.table[i].bloco4.word3 = None
+					self.table[i].bloco4.word4 = None
+					self.table[i].bloco4.tag_bin = tag_dada_bin
+					self.table[i].bloco4.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 4 == 1:############# word 2 ############
+					self.table[i].bloco4.word1 = None
+					self.table[i].bloco4.word2 = dado
+					self.table[i].bloco4.word3 = None
+					self.table[i].bloco4.word4 = None
+					self.table[i].bloco4.tag_bin = tag_dada_bin
+					self.table[i].bloco4.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 4 == 2:############# word 3 ############
+					self.table[i].bloco4.word1 = None
+					self.table[i].bloco4.word2 = None
+					self.table[i].bloco4.word3 = dado
+					self.table[i].bloco4.word4 = None
+					self.table[i].bloco4.tag_bin = tag_dada_bin
+					self.table[i].bloco4.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 4 == 3:############# word 4 ############
+					self.table[i].bloco4.word1 = None
+					self.table[i].bloco4.word2 = None
+					self.table[i].bloco4.word3 = None
+					self.table[i].bloco4.word4 = dado
+					self.table[i].bloco4.tag_bin = tag_dada_bin
+					self.table[i].bloco4.valid_bit = 1
+					self.table[i].livre += 1
+				self.table[i].fifo.append(4)
+			elif self.table[i].livre >= 4: #TEM QUE ESCOLHER UM BLOCO PARA SUBSTITUIR...
+				usado_ha_mais_tempo = self.table[i].fifo[0]
+				self.table[i].fifo.pop(0)
+				if usado_ha_mais_tempo == 1:
+					if num_address % 4 == 0:############# word 1 ############
+						self.table[i].bloco1.word1 = dado
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 4 == 1:############# word 2 ############
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = dado
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 4 == 2:############# word 3 ############
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = dado
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 4 == 3:############# word 4 ############
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = dado
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+				elif usado_ha_mais_tempo == 2:
+					if num_address % 4 == 0:############# word 1 ############
+						self.table[i].bloco2.word1 = dado
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 4 == 1:############# word 2 ############
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = dado
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 4 == 2:############# word 3 ############
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = dado
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 4 == 3:############# word 4 ############
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = dado
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+					self.table[i].fifo.append(2)
+				elif usado_ha_mais_tempo == 3:
+					if num_address % 4 == 0:############# word 1 ############
+						self.table[i].bloco3.word1 = dado
+						self.table[i].bloco3.word2 = None
+						self.table[i].bloco3.word3 = None
+						self.table[i].bloco3.word4 = None
+						self.table[i].bloco3.tag_bin = tag_dada_bin
+						self.table[i].bloco3.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 4 == 1:############# word 2 ############
+						self.table[i].bloco3.word1 = None
+						self.table[i].bloco3.word2 = dado
+						self.table[i].bloco3.word3 = None
+						self.table[i].bloco3.word4 = None
+						self.table[i].bloco3.tag_bin = tag_dada_bin
+						self.table[i].bloco3.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 4 == 2:############# word 3 ############
+						self.table[i].bloco3.word1 = None
+						self.table[i].bloco3.word2 = None
+						self.table[i].bloco3.word3 = dado
+						self.table[i].bloco3.word4 = None
+						self.table[i].bloco3.tag_bin = tag_dada_bin
+						self.table[i].bloco3.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 4 == 3:############# word 4 ############
+						self.table[i].bloco3.word1 = None
+						self.table[i].bloco3.word2 = None
+						self.table[i].bloco3.word3 = None
+						self.table[i].bloco3.word4 = dado
+						self.table[i].bloco3.tag_bin = tag_dada_bin
+						self.table[i].bloco3.valid_bit = 1
+						self.table[i].livre += 1
+					self.table[i].fifo.append(3)
+				elif usado_ha_mais_tempo == 4:
+					if num_address % 4 == 0:############# word 1 ############
+						self.table[i].bloco4.word1 = dado
+						self.table[i].bloco4.word2 = None
+						self.table[i].bloco4.word3 = None
+						self.table[i].bloco4.word4 = None
+						self.table[i].bloco4.tag_bin = tag_dada_bin
+						self.table[i].bloco4.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 4 == 1:############# word 2 ############
+						self.table[i].bloco4.word1 = None
+						self.table[i].bloco4.word2 = dado
+						self.table[i].bloco4.word3 = None
+						self.table[i].bloco4.word4 = None
+						self.table[i].bloco4.tag_bin = tag_dada_bin
+						self.table[i].bloco4.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 4 == 2:############# word 3 ############
+						self.table[i].bloco4.word1 = None
+						self.table[i].bloco4.word2 = None
+						self.table[i].bloco4.word3 = dado
+						self.table[i].bloco4.word4 = None
+						self.table[i].bloco4.tag_bin = tag_dada_bin
+						self.table[i].bloco4.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 4 == 3:############# word 4 ############
+						self.table[i].bloco4.word1 = None
+						self.table[i].bloco4.word2 = None
+						self.table[i].bloco4.word3 = None
+						self.table[i].bloco4.word4 = dado
+						self.table[i].bloco4.tag_bin = tag_dada_bin
+						self.table[i].bloco4.valid_bit = 1
+						self.table[i].livre += 1
+					self.table[i].fifo.append(4)
 		elif tipo_cache == 'C4':
-			pass
+			#FOUR-WAY SET ASSOCIATIVE WITH 8 WORD/BLOCK
+			######################################################
+			##          CONFIGURACAO DO ENDERECO 32 BITS        ##
+			##    TAG                 SET           SET OFFSET  ##   
+			##  22 BITS             O5 BITS          05 BITS    ##
+			######################################################
+			i = int(binary_address[22:27], 2)
+			tag_dada_bin = binary_address[0:22]
+			dado = int(num_address)
+			set_offset = binary_address[-5:]
+			if self.table[i].livre == 0: #BLOCO 01
+				if num_address % 8 == 0:############# word 1 ############
+					self.table[i].bloco1.word1 = dado
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.word5 = None
+					self.table[i].bloco1.word6 = None
+					self.table[i].bloco1.word7 = None
+					self.table[i].bloco1.word8 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 1:############# word 2 ############
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = dado
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.word5 = None
+					self.table[i].bloco1.word6 = None
+					self.table[i].bloco1.word7 = None
+					self.table[i].bloco1.word8 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 2:############# word 3 ############
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = dado
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.word5 = None
+					self.table[i].bloco1.word6 = None
+					self.table[i].bloco1.word7 = None
+					self.table[i].bloco1.word8 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 3:############# word 4 ############
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = dado
+					self.table[i].bloco1.word5 = None
+					self.table[i].bloco1.word6 = None
+					self.table[i].bloco1.word7 = None
+					self.table[i].bloco1.word8 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 4:############# word 5 ############
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.word5 = dado
+					self.table[i].bloco1.word6 = None
+					self.table[i].bloco1.word7 = None
+					self.table[i].bloco1.word8 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 5:############# word 6 ############
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.word5 = None
+					self.table[i].bloco1.word6 = dado
+					self.table[i].bloco1.word7 = None
+					self.table[i].bloco1.word8 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 6:############# word 7 ############
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.word5 = None
+					self.table[i].bloco1.word6 = None
+					self.table[i].bloco1.word7 = dado 
+					self.table[i].bloco1.word8 = None
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 7:############# word 8 ############
+					self.table[i].bloco1.word1 = None
+					self.table[i].bloco1.word2 = None
+					self.table[i].bloco1.word3 = None
+					self.table[i].bloco1.word4 = None
+					self.table[i].bloco1.word5 = None
+					self.table[i].bloco1.word6 = None
+					self.table[i].bloco1.word7 = None
+					self.table[i].bloco1.word8 = dado
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+				self.table[i].fifo.append(1)
+			elif self.table[i].livre == 1: #BLOCO 02
+				if num_address % 8 == 0:############# word 1 ############
+					self.table[i].bloco2.word1 = dado
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.word5 = None
+					self.table[i].bloco2.word6 = None
+					self.table[i].bloco2.word7 = None
+					self.table[i].bloco2.word8 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 1:############# word 2 ############
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = dado
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.word5 = None
+					self.table[i].bloco2.word6 = None
+					self.table[i].bloco2.word7 = None
+					self.table[i].bloco2.word8 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 2:############# word 3 ############
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = dado
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.word5 = None
+					self.table[i].bloco2.word6 = None
+					self.table[i].bloco2.word7 = None
+					self.table[i].bloco2.word8 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 3:############# word 4 ############
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = dado
+					self.table[i].bloco2.word5 = None
+					self.table[i].bloco2.word6 = None
+					self.table[i].bloco2.word7 = None
+					self.table[i].bloco2.word8 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 4:############# word 5 ############
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.word5 = dado
+					self.table[i].bloco2.word6 = None
+					self.table[i].bloco2.word7 = None
+					self.table[i].bloco2.word8 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 5:############# word 6 ############
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.word5 = None
+					self.table[i].bloco2.word6 = dado
+					self.table[i].bloco2.word7 = None
+					self.table[i].bloco2.word8 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 6:############# word 7 ############
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.word5 = None
+					self.table[i].bloco2.word6 = None
+					self.table[i].bloco2.word7 = dado 
+					self.table[i].bloco2.word8 = None
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 7:############# word 8 ############
+					self.table[i].bloco2.word1 = None
+					self.table[i].bloco2.word2 = None
+					self.table[i].bloco2.word3 = None
+					self.table[i].bloco2.word4 = None
+					self.table[i].bloco2.word5 = None
+					self.table[i].bloco2.word6 = None
+					self.table[i].bloco2.word7 = None
+					self.table[i].bloco2.word8 = dado
+					self.table[i].bloco2.tag_bin = tag_dada_bin
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 1
+				self.table[i].fifo.append(2)
+			elif self.table[i].livre == 2: #BLOCO 03
+				if num_address % 8 == 0:############# word 1 ############
+					self.table[i].bloco3.word1 = dado
+					self.table[i].bloco3.word2 = None
+					self.table[i].bloco3.word3 = None
+					self.table[i].bloco3.word4 = None
+					self.table[i].bloco3.word5 = None
+					self.table[i].bloco3.word6 = None
+					self.table[i].bloco3.word7 = None
+					self.table[i].bloco3.word8 = None
+					self.table[i].bloco3.tag_bin = tag_dada_bin
+					self.table[i].bloco3.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 1:############# word 2 ############
+					self.table[i].bloco3.word1 = None
+					self.table[i].bloco3.word2 = dado
+					self.table[i].bloco3.word3 = None
+					self.table[i].bloco3.word4 = None
+					self.table[i].bloco3.word5 = None
+					self.table[i].bloco3.word6 = None
+					self.table[i].bloco3.word7 = None
+					self.table[i].bloco3.word8 = None
+					self.table[i].bloco3.tag_bin = tag_dada_bin
+					self.table[i].bloco3.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 2:############# word 3 ############
+					self.table[i].bloco3.word1 = None
+					self.table[i].bloco3.word2 = None
+					self.table[i].bloco3.word3 = dado
+					self.table[i].bloco3.word4 = None
+					self.table[i].bloco3.word5 = None
+					self.table[i].bloco3.word6 = None
+					self.table[i].bloco3.word7 = None
+					self.table[i].bloco3.word8 = None
+					self.table[i].bloco3.tag_bin = tag_dada_bin
+					self.table[i].bloco3.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 3:############# word 4 ############
+					self.table[i].bloco3.word1 = None
+					self.table[i].bloco3.word2 = None
+					self.table[i].bloco3.word3 = None
+					self.table[i].bloco3.word4 = dado
+					self.table[i].bloco3.word5 = None
+					self.table[i].bloco3.word6 = None
+					self.table[i].bloco3.word7 = None
+					self.table[i].bloco3.word8 = None
+					self.table[i].bloco3.tag_bin = tag_dada_bin
+					self.table[i].bloco3.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 4:############# word 5 ############
+					self.table[i].bloco3.word1 = None
+					self.table[i].bloco3.word2 = None
+					self.table[i].bloco3.word3 = None
+					self.table[i].bloco3.word4 = None
+					self.table[i].bloco3.word5 = dado
+					self.table[i].bloco3.word6 = None
+					self.table[i].bloco3.word7 = None
+					self.table[i].bloco3.word8 = None
+					self.table[i].bloco3.tag_bin = tag_dada_bin
+					self.table[i].bloco3.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 5:############# word 6 ############
+					self.table[i].bloco3.word1 = None
+					self.table[i].bloco3.word2 = None
+					self.table[i].bloco3.word3 = None
+					self.table[i].bloco3.word4 = None
+					self.table[i].bloco3.word5 = None
+					self.table[i].bloco3.word6 = dado
+					self.table[i].bloco3.word7 = None
+					self.table[i].bloco3.word8 = None
+					self.table[i].bloco3.tag_bin = tag_dada_bin
+					self.table[i].bloco3.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 6:############# word 7 ############
+					self.table[i].bloco3.word1 = None
+					self.table[i].bloco3.word2 = None
+					self.table[i].bloco3.word3 = None
+					self.table[i].bloco3.word4 = None
+					self.table[i].bloco3.word5 = None
+					self.table[i].bloco3.word6 = None
+					self.table[i].bloco3.word7 = dado 
+					self.table[i].bloco3.word8 = None
+					self.table[i].bloco3.tag_bin = tag_dada_bin
+					self.table[i].bloco3.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 7:############# word 8 ############
+					self.table[i].bloco3.word1 = None
+					self.table[i].bloco3.word2 = None
+					self.table[i].bloco3.word3 = None
+					self.table[i].bloco3.word4 = None
+					self.table[i].bloco3.word5 = None
+					self.table[i].bloco3.word6 = None
+					self.table[i].bloco3.word7 = None
+					self.table[i].bloco3.word8 = dado
+					self.table[i].bloco3.tag_bin = tag_dada_bin
+					self.table[i].bloco3.valid_bit = 1
+					self.table[i].livre += 1
+				self.table[i].fifo.append(3)
+			elif self.table[i].livre == 3: #BLOCO 04
+				if num_address % 8 == 0:############# word 1 ############
+					self.table[i].bloco4.word1 = dado
+					self.table[i].bloco4.word2 = None
+					self.table[i].bloco4.word3 = None
+					self.table[i].bloco4.word4 = None
+					self.table[i].bloco4.word5 = None
+					self.table[i].bloco4.word6 = None
+					self.table[i].bloco4.word7 = None
+					self.table[i].bloco4.word8 = None
+					self.table[i].bloco4.tag_bin = tag_dada_bin
+					self.table[i].bloco4.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 1:############# word 2 ############
+					self.table[i].bloco4.word1 = None
+					self.table[i].bloco4.word2 = dado
+					self.table[i].bloco4.word3 = None
+					self.table[i].bloco4.word4 = None
+					self.table[i].bloco4.word5 = None
+					self.table[i].bloco4.word6 = None
+					self.table[i].bloco4.word7 = None
+					self.table[i].bloco4.word8 = None
+					self.table[i].bloco4.tag_bin = tag_dada_bin
+					self.table[i].bloco4.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 2:############# word 3 ############
+					self.table[i].bloco4.word1 = None
+					self.table[i].bloco4.word2 = None
+					self.table[i].bloco4.word3 = dado
+					self.table[i].bloco4.word4 = None
+					self.table[i].bloco4.word5 = None
+					self.table[i].bloco4.word6 = None
+					self.table[i].bloco4.word7 = None
+					self.table[i].bloco4.word8 = None
+					self.table[i].bloco4.tag_bin = tag_dada_bin
+					self.table[i].bloco4.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 3:############# word 4 ############
+					self.table[i].bloco4.word1 = None
+					self.table[i].bloco4.word2 = None
+					self.table[i].bloco4.word3 = None
+					self.table[i].bloco4.word4 = dado
+					self.table[i].bloco4.word5 = None
+					self.table[i].bloco4.word6 = None
+					self.table[i].bloco4.word7 = None
+					self.table[i].bloco4.word8 = None
+					self.table[i].bloco4.tag_bin = tag_dada_bin
+					self.table[i].bloco4.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 4:############# word 5 ############
+					self.table[i].bloco4.word1 = None
+					self.table[i].bloco4.word2 = None
+					self.table[i].bloco4.word3 = None
+					self.table[i].bloco4.word4 = None
+					self.table[i].bloco4.word5 = dado
+					self.table[i].bloco4.word6 = None
+					self.table[i].bloco4.word7 = None
+					self.table[i].bloco4.word8 = None
+					self.table[i].bloco4.tag_bin = tag_dada_bin
+					self.table[i].bloco4.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 5:############# word 6 ############
+					self.table[i].bloco4.word1 = None
+					self.table[i].bloco4.word2 = None
+					self.table[i].bloco4.word3 = None
+					self.table[i].bloco4.word4 = None
+					self.table[i].bloco4.word5 = None
+					self.table[i].bloco4.word6 = dado
+					self.table[i].bloco4.word7 = None
+					self.table[i].bloco4.word8 = None
+					self.table[i].bloco4.tag_bin = tag_dada_bin
+					self.table[i].bloco4.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 6:############# word 7 ############
+					self.table[i].bloco4.word1 = None
+					self.table[i].bloco4.word2 = None
+					self.table[i].bloco4.word3 = None
+					self.table[i].bloco4.word4 = None
+					self.table[i].bloco4.word5 = None
+					self.table[i].bloco4.word6 = None
+					self.table[i].bloco4.word7 = dado 
+					self.table[i].bloco4.word8 = None
+					self.table[i].bloco4.tag_bin = tag_dada_bin
+					self.table[i].bloco4.valid_bit = 1
+					self.table[i].livre += 1
+				elif num_address % 8 == 7:############# word 8 ############
+					self.table[i].bloco4.word1 = None
+					self.table[i].bloco4.word2 = None
+					self.table[i].bloco4.word3 = None
+					self.table[i].bloco4.word4 = None
+					self.table[i].bloco4.word5 = None
+					self.table[i].bloco4.word6 = None
+					self.table[i].bloco4.word7 = None
+					self.table[i].bloco4.word8 = dado
+					self.table[i].bloco4.tag_bin = tag_dada_bin
+					self.table[i].bloco4.valid_bit = 1
+					self.table[i].livre += 1
+				self.table[i].fifo.append(4)
+			elif self.table[i].livre >= 4: #TEM QUE ESCOLHER UM BLOCO PARA SUBSTITUIR...
+				usado_ha_mais_tempo = self.table[i].fifo[0]
+				self.table[i].fifo.pop(0)
+				if usado_ha_mais_tempo == 1:
+					if num_address % 8 == 0:############# word 1 ############
+						self.table[i].bloco1.word1 = dado
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.word5 = None
+						self.table[i].bloco1.word6 = None
+						self.table[i].bloco1.word7 = None
+						self.table[i].bloco1.word8 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 1:############# word 2 ############
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = dado
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.word5 = None
+						self.table[i].bloco1.word6 = None
+						self.table[i].bloco1.word7 = None
+						self.table[i].bloco1.word8 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 2:############# word 3 ############
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = dado
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.word5 = None
+						self.table[i].bloco1.word6 = None
+						self.table[i].bloco1.word7 = None
+						self.table[i].bloco1.word8 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 3:############# word 4 ############
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = dado
+						self.table[i].bloco1.word5 = None
+						self.table[i].bloco1.word6 = None
+						self.table[i].bloco1.word7 = None
+						self.table[i].bloco1.word8 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 4:############# word 5 ############
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.word5 = dado
+						self.table[i].bloco1.word6 = None
+						self.table[i].bloco1.word7 = None
+						self.table[i].bloco1.word8 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 5:############# word 6 ############
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.word5 = None
+						self.table[i].bloco1.word6 = dado
+						self.table[i].bloco1.word7 = None
+						self.table[i].bloco1.word8 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 6:############# word 7 ############
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.word5 = None
+						self.table[i].bloco1.word6 = None
+						self.table[i].bloco1.word7 = dado 
+						self.table[i].bloco1.word8 = None
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 7:############# word 8 ############
+						self.table[i].bloco1.word1 = None
+						self.table[i].bloco1.word2 = None
+						self.table[i].bloco1.word3 = None
+						self.table[i].bloco1.word4 = None
+						self.table[i].bloco1.word5 = None
+						self.table[i].bloco1.word6 = None
+						self.table[i].bloco1.word7 = None
+						self.table[i].bloco1.word8 = dado
+						self.table[i].bloco1.tag_bin = tag_dada_bin
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+				elif usado_ha_mais_tempo == 2:
+					if num_address % 8 == 0:############# word 1 ############
+						self.table[i].bloco2.word1 = dado
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.word5 = None
+						self.table[i].bloco2.word6 = None
+						self.table[i].bloco2.word7 = None
+						self.table[i].bloco2.word8 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 1:############# word 2 ############
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = dado
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.word5 = None
+						self.table[i].bloco2.word6 = None
+						self.table[i].bloco2.word7 = None
+						self.table[i].bloco2.word8 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 2:############# word 3 ############
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = dado
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.word5 = None
+						self.table[i].bloco2.word6 = None
+						self.table[i].bloco2.word7 = None
+						self.table[i].bloco2.word8 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 3:############# word 4 ############
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = dado
+						self.table[i].bloco2.word5 = None
+						self.table[i].bloco2.word6 = None
+						self.table[i].bloco2.word7 = None
+						self.table[i].bloco2.word8 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 4:############# word 5 ############
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.word5 = dado
+						self.table[i].bloco2.word6 = None
+						self.table[i].bloco2.word7 = None
+						self.table[i].bloco2.word8 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 5:############# word 6 ############
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.word5 = None
+						self.table[i].bloco2.word6 = dado
+						self.table[i].bloco2.word7 = None
+						self.table[i].bloco2.word8 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 6:############# word 7 ############
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.word5 = None
+						self.table[i].bloco2.word6 = None
+						self.table[i].bloco2.word7 = dado 
+						self.table[i].bloco2.word8 = None
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 7:############# word 8 ############
+						self.table[i].bloco2.word1 = None
+						self.table[i].bloco2.word2 = None
+						self.table[i].bloco2.word3 = None
+						self.table[i].bloco2.word4 = None
+						self.table[i].bloco2.word5 = None
+						self.table[i].bloco2.word6 = None
+						self.table[i].bloco2.word7 = None
+						self.table[i].bloco2.word8 = dado
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+					self.table[i].fifo.append(2)
+				elif usado_ha_mais_tempo == 3:
+					if num_address % 8 == 0:############# word 1 ############
+						self.table[i].bloco3.word1 = dado
+						self.table[i].bloco3.word2 = None
+						self.table[i].bloco3.word3 = None
+						self.table[i].bloco3.word4 = None
+						self.table[i].bloco3.word5 = None
+						self.table[i].bloco3.word6 = None
+						self.table[i].bloco3.word7 = None
+						self.table[i].bloco3.word8 = None
+						self.table[i].bloco3.tag_bin = tag_dada_bin
+						self.table[i].bloco3.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 1:############# word 2 ############
+						self.table[i].bloco3.word1 = None
+						self.table[i].bloco3.word2 = dado
+						self.table[i].bloco3.word3 = None
+						self.table[i].bloco3.word4 = None
+						self.table[i].bloco3.word5 = None
+						self.table[i].bloco3.word6 = None
+						self.table[i].bloco3.word7 = None
+						self.table[i].bloco3.word8 = None
+						self.table[i].bloco3.tag_bin = tag_dada_bin
+						self.table[i].bloco3.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 2:############# word 3 ############
+						self.table[i].bloco3.word1 = None
+						self.table[i].bloco3.word2 = None
+						self.table[i].bloco3.word3 = dado
+						self.table[i].bloco3.word4 = None
+						self.table[i].bloco3.word5 = None
+						self.table[i].bloco3.word6 = None
+						self.table[i].bloco3.word7 = None
+						self.table[i].bloco3.word8 = None
+						self.table[i].bloco3.tag_bin = tag_dada_bin
+						self.table[i].bloco3.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 3:############# word 4 ############
+						self.table[i].bloco3.word1 = None
+						self.table[i].bloco3.word2 = None
+						self.table[i].bloco3.word3 = None
+						self.table[i].bloco3.word4 = dado
+						self.table[i].bloco3.word5 = None
+						self.table[i].bloco3.word6 = None
+						self.table[i].bloco3.word7 = None
+						self.table[i].bloco3.word8 = None
+						self.table[i].bloco3.tag_bin = tag_dada_bin
+						self.table[i].bloco3.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 4:############# word 5 ############
+						self.table[i].bloco3.word1 = None
+						self.table[i].bloco3.word2 = None
+						self.table[i].bloco3.word3 = None
+						self.table[i].bloco3.word4 = None
+						self.table[i].bloco3.word5 = dado
+						self.table[i].bloco3.word6 = None
+						self.table[i].bloco3.word7 = None
+						self.table[i].bloco3.word8 = None
+						self.table[i].bloco3.tag_bin = tag_dada_bin
+						self.table[i].bloco3.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 5:############# word 6 ############
+						self.table[i].bloco3.word1 = None
+						self.table[i].bloco3.word2 = None
+						self.table[i].bloco3.word3 = None
+						self.table[i].bloco3.word4 = None
+						self.table[i].bloco3.word5 = None
+						self.table[i].bloco3.word6 = dado
+						self.table[i].bloco3.word7 = None
+						self.table[i].bloco3.word8 = None
+						self.table[i].bloco3.tag_bin = tag_dada_bin
+						self.table[i].bloco3.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 6:############# word 7 ############
+						self.table[i].bloco3.word1 = None
+						self.table[i].bloco3.word2 = None
+						self.table[i].bloco3.word3 = None
+						self.table[i].bloco3.word4 = None
+						self.table[i].bloco3.word5 = None
+						self.table[i].bloco3.word6 = None
+						self.table[i].bloco3.word7 = dado 
+						self.table[i].bloco3.word8 = None
+						self.table[i].bloco3.tag_bin = tag_dada_bin
+						self.table[i].bloco3.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 7:############# word 8 ############
+						self.table[i].bloco3.word1 = None
+						self.table[i].bloco3.word2 = None
+						self.table[i].bloco3.word3 = None
+						self.table[i].bloco3.word4 = None
+						self.table[i].bloco3.word5 = None
+						self.table[i].bloco3.word6 = None
+						self.table[i].bloco3.word7 = None
+						self.table[i].bloco3.word8 = dado
+						self.table[i].bloco3.tag_bin = tag_dada_bin
+						self.table[i].bloco3.valid_bit = 1
+						self.table[i].livre += 1
+					self.table[i].fifo.append(3)
+				elif usado_ha_mais_tempo == 4:
+					if num_address % 8 == 0:############# word 1 ############
+						self.table[i].bloco4.word1 = dado
+						self.table[i].bloco4.word2 = None
+						self.table[i].bloco4.word3 = None
+						self.table[i].bloco4.word4 = None
+						self.table[i].bloco4.word5 = None
+						self.table[i].bloco4.word6 = None
+						self.table[i].bloco4.word7 = None
+						self.table[i].bloco4.word8 = None
+						self.table[i].bloco4.tag_bin = tag_dada_bin
+						self.table[i].bloco4.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 1:############# word 2 ############
+						self.table[i].bloco4.word1 = None
+						self.table[i].bloco4.word2 = dado
+						self.table[i].bloco4.word3 = None
+						self.table[i].bloco4.word4 = None
+						self.table[i].bloco4.word5 = None
+						self.table[i].bloco4.word6 = None
+						self.table[i].bloco4.word7 = None
+						self.table[i].bloco4.word8 = None
+						self.table[i].bloco4.tag_bin = tag_dada_bin
+						self.table[i].bloco4.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 2:############# word 3 ############
+						self.table[i].bloco4.word1 = None
+						self.table[i].bloco4.word2 = None
+						self.table[i].bloco4.word3 = dado
+						self.table[i].bloco4.word4 = None
+						self.table[i].bloco4.word5 = None
+						self.table[i].bloco4.word6 = None
+						self.table[i].bloco4.word7 = None
+						self.table[i].bloco4.word8 = None
+						self.table[i].bloco4.tag_bin = tag_dada_bin
+						self.table[i].bloco4.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 3:############# word 4 ############
+						self.table[i].bloco4.word1 = None
+						self.table[i].bloco4.word2 = None
+						self.table[i].bloco4.word3 = None
+						self.table[i].bloco4.word4 = dado
+						self.table[i].bloco4.word5 = None
+						self.table[i].bloco4.word6 = None
+						self.table[i].bloco4.word7 = None
+						self.table[i].bloco4.word8 = None
+						self.table[i].bloco4.tag_bin = tag_dada_bin
+						self.table[i].bloco4.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 4:############# word 5 ############
+						self.table[i].bloco4.word1 = None
+						self.table[i].bloco4.word2 = None
+						self.table[i].bloco4.word3 = None
+						self.table[i].bloco4.word4 = None
+						self.table[i].bloco4.word5 = dado
+						self.table[i].bloco4.word6 = None
+						self.table[i].bloco4.word7 = None
+						self.table[i].bloco4.word8 = None
+						self.table[i].bloco4.tag_bin = tag_dada_bin
+						self.table[i].bloco4.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 5:############# word 6 ############
+						self.table[i].bloco4.word1 = None
+						self.table[i].bloco4.word2 = None
+						self.table[i].bloco4.word3 = None
+						self.table[i].bloco4.word4 = None
+						self.table[i].bloco4.word5 = None
+						self.table[i].bloco4.word6 = dado
+						self.table[i].bloco4.word7 = None
+						self.table[i].bloco4.word8 = None
+						self.table[i].bloco4.tag_bin = tag_dada_bin
+						self.table[i].bloco4.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 6:############# word 7 ############
+						self.table[i].bloco4.word1 = None
+						self.table[i].bloco4.word2 = None
+						self.table[i].bloco4.word3 = None
+						self.table[i].bloco4.word4 = None
+						self.table[i].bloco4.word5 = None
+						self.table[i].bloco4.word6 = None
+						self.table[i].bloco4.word7 = dado 
+						self.table[i].bloco4.word8 = None
+						self.table[i].bloco4.tag_bin = tag_dada_bin
+						self.table[i].bloco4.valid_bit = 1
+						self.table[i].livre += 1
+					elif num_address % 8 == 7:############# word 8 ############
+						self.table[i].bloco4.word1 = None
+						self.table[i].bloco4.word2 = None
+						self.table[i].bloco4.word3 = None
+						self.table[i].bloco4.word4 = None
+						self.table[i].bloco4.word5 = None
+						self.table[i].bloco4.word6 = None
+						self.table[i].bloco4.word7 = None
+						self.table[i].bloco4.word8 = dado
+						self.table[i].bloco4.tag_bin = tag_dada_bin
+						self.table[i].bloco4.valid_bit = 1
+						self.table[i].livre += 1
+					self.table[i].fifo.append(4)
 		elif tipo_cache == 'D1':
 			pass
 		elif tipo_cache == 'D2':
