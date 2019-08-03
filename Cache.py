@@ -2480,14 +2480,246 @@ class Cache:
 						self.table[i].livre += 1
 					self.table[i].fifo.append(4)
 		elif tipo_cache == 'D1':
-			pass
+			#FULLY ASSOCIATIVE WITH 1 WORD/BLOCK
+			######################################################
+			##          CONFIGURACAO DO ENDERECO 32 BITS        ##
+			##                        TAG                       ##   
+			##                      32 BITS                     ##
+			######################################################
+			i = self.free #comeco escrevendo no primeiro block do unico set
+			tag_dada_bin = binary_address
+			dado = int(num_address)
+			self.table[i].tag_bin = tag_dada_bin
+			self.table[i].word1 = dado 
+			self.table[i].valid_bit = 1
+			pseudoindex = bin(i)
+			newindex = pseudoindex[2:]
+			final = newindex.zfill(32)
+			self.table[i].index_binary = final
+			self.free += 1
+			if self.free == 1024:
+				self.free = 0
 		elif tipo_cache == 'D2':
-			pass
+			#FULLY ASSOCIATIVE WITH 2 WORDS/BLOCK
+			######################################################
+			##          CONFIGURACAO DO ENDERECO 32 BITS        ##
+			##                   TAG         OFFSET             ##   
+			##                 31 BITS        1 BIT             ##
+			######################################################
+			i = self.free #comeco escrevendo no primeiro block do unico set
+			tag_dada_bin = binary_address[0:31]
+			dado = int(num_address)
+			if dado % 2 == 0:
+				self.table[i].tag_bin = tag_dada_bin
+				self.table[i].word1 = dado
+				self.table[i].word2 = None
+				self.table[i].valid_bit = 1
+				pseudoindex = bin(i)
+				newindex = pseudoindex[2:]
+				final = newindex.zfill(32)
+				self.table[i].index_binary = final
+			elif dado % 2 == 1:
+				self.table[i].tag_bin = tag_dada_bin
+				self.table[i].word1 = None
+				self.table[i].word2 = dado
+				self.table[i].valid_bit = 1
+				pseudoindex = bin(i)
+				newindex = pseudoindex[2:]
+				final = newindex.zfill(32)
+				self.table[i].index_binary = final
+			self.free += 1
+			if self.free == 512:
+				self.free = 0
 		elif tipo_cache == 'D3':
-			pass
+			#FULLY ASSOCIATIVE WITH 4 WORDS/BLOCK
+			######################################################
+			##          CONFIGURACAO DO ENDERECO 32 BITS        ##
+			##                   TAG         OFFSET             ##   
+			##                 30 BITS        2 BIT             ##
+			######################################################
+			i = self.free #comeco escrevendo no primeiro block do unico set
+			tag_dada_bin = binary_address[0:30]
+			dado = int(num_address)
+			if dado % 4 == 0:
+				self.table[i].tag_bin = tag_dada_bin
+				self.table[i].word1 = dado
+				self.table[i].word2 = None
+				self.table[i].word3 = None 
+				self.table[i].word4 = None
+				self.table[i].valid_bit = 1
+				pseudoindex = bin(i)
+				newindex = pseudoindex[2:]
+				final = newindex.zfill(32)
+				self.table[i].index_binary = final
+			elif dado % 4 == 1:
+				self.table[i].tag_bin = tag_dada_bin
+				self.table[i].word1 = None
+				self.table[i].word2 = dado
+				self.table[i].word3 = None 
+				self.table[i].word4 = None
+				self.table[i].valid_bit = 1
+				pseudoindex = bin(i)
+				newindex = pseudoindex[2:]
+				final = newindex.zfill(32)
+				self.table[i].index_binary = final
+			elif dado % 4 == 2:
+				self.table[i].tag_bin = tag_dada_bin
+				self.table[i].word1 = None
+				self.table[i].word2 = None
+				self.table[i].word3 = dado  
+				self.table[i].word4 = None
+				self.table[i].valid_bit = 1
+				pseudoindex = bin(i)
+				newindex = pseudoindex[2:]
+				final = newindex.zfill(32)
+				self.table[i].index_binary = final
+			elif dado % 4 == 3:
+				self.table[i].tag_bin = tag_dada_bin
+				self.table[i].word1 = None
+				self.table[i].word2 = None
+				self.table[i].word3 = None 
+				self.table[i].word4 = dado
+				self.table[i].valid_bit = 1
+				pseudoindex = bin(i)
+				newindex = pseudoindex[2:]
+				final = newindex.zfill(32)
+				self.table[i].index_binary = final
+			self.free += 1
+			if self.free == 256:
+				self.free = 0
 		elif tipo_cache == 'D4':
-			pass
-
+			#FULLY ASSOCIATIVE WITH 8 WORDS/BLOCK
+			######################################################
+			##          CONFIGURACAO DO ENDERECO 32 BITS        ##
+			##                   TAG         OFFSET             ##   
+			##                 29 BITS        3 BIT             ##
+			######################################################
+			i = self.free
+			tag_dada_bin = binary_address[0:29]
+			dado = int(num_address)
+			if dado % 8 == 0:
+				self.table[i].tag_bin = tag_dada_bin
+				self.table[i].word1 = dado
+				self.table[i].word2 = None
+				self.table[i].word3 = None 
+				self.table[i].word4 = None
+				self.table[i].word5 = None
+				self.table[i].word6 = None
+				self.table[i].word7 = None
+				self.table[i].word8 = None
+				self.table[i].valid_bit = 1
+				pseudoindex = bin(i)
+				newindex = pseudoindex[2:]
+				final = newindex.zfill(32)
+				self.table[i].index_binary = final
+			elif dado % 8 == 1:
+				self.table[i].tag_bin = tag_dada_bin
+				self.table[i].word1 = None
+				self.table[i].word2 = dado 
+				self.table[i].word3 = None 
+				self.table[i].word4 = None
+				self.table[i].word5 = None
+				self.table[i].word6 = None
+				self.table[i].word7 = None
+				self.table[i].word8 = None
+				self.table[i].valid_bit = 1
+				pseudoindex = bin(i)
+				newindex = pseudoindex[2:]
+				final = newindex.zfill(32)
+				self.table[i].index_binary = final
+			elif dado % 8 == 2:
+				self.table[i].tag_bin = tag_dada_bin
+				self.table[i].word1 = None
+				self.table[i].word2 = None
+				self.table[i].word3 = dado 
+				self.table[i].word4 = None
+				self.table[i].word5 = None
+				self.table[i].word6 = None
+				self.table[i].word7 = None
+				self.table[i].word8 = None
+				self.table[i].valid_bit = 1
+				pseudoindex = bin(i)
+				newindex = pseudoindex[2:]
+				final = newindex.zfill(32)
+				self.table[i].index_binary = final
+			elif dado % 8 == 3:
+				self.table[i].tag_bin = tag_dada_bin
+				self.table[i].word1 = None
+				self.table[i].word2 = None
+				self.table[i].word3 = None 
+				self.table[i].word4 = dado
+				self.table[i].word5 = None
+				self.table[i].word6 = None
+				self.table[i].word7 = None
+				self.table[i].word8 = None
+				self.table[i].valid_bit = 1
+				pseudoindex = bin(i)
+				newindex = pseudoindex[2:]
+				final = newindex.zfill(32)
+				self.table[i].index_binary = final
+			elif dado % 8 == 4:
+				self.table[i].tag_bin = tag_dada_bin
+				self.table[i].word1 = None
+				self.table[i].word2 = None
+				self.table[i].word3 = None 
+				self.table[i].word4 = None
+				self.table[i].word5 = dado 
+				self.table[i].word6 = None
+				self.table[i].word7 = None
+				self.table[i].word8 = None
+				self.table[i].valid_bit = 1
+				pseudoindex = bin(i)
+				newindex = pseudoindex[2:]
+				final = newindex.zfill(32)
+				self.table[i].index_binary = final
+			elif dado % 8 == 5:
+				self.table[i].tag_bin = tag_dada_bin
+				self.table[i].word1 = None
+				self.table[i].word2 = None
+				self.table[i].word3 = None 
+				self.table[i].word4 = None
+				self.table[i].word5 = None
+				self.table[i].word6 = dado 
+				self.table[i].word7 = None
+				self.table[i].word8 = None
+				self.table[i].valid_bit = 1
+				pseudoindex = bin(i)
+				newindex = pseudoindex[2:]
+				final = newindex.zfill(32)
+				self.table[i].index_binary = final
+			elif dado % 8 == 6:
+				self.table[i].tag_bin = tag_dada_bin
+				self.table[i].word1 = None
+				self.table[i].word2 = None
+				self.table[i].word3 = None 
+				self.table[i].word4 = None
+				self.table[i].word5 = None
+				self.table[i].word6 = None
+				self.table[i].word7 = dado 
+				self.table[i].word8 = None
+				self.table[i].valid_bit = 1
+				pseudoindex = bin(i)
+				newindex = pseudoindex[2:]
+				final = newindex.zfill(32)
+				self.table[i].index_binary = final
+			elif dado % 8 == 7:
+				self.table[i].tag_bin = tag_dada_bin
+				self.table[i].word1 = None
+				self.table[i].word2 = None
+				self.table[i].word3 = None 
+				self.table[i].word4 = None
+				self.table[i].word5 = None
+				self.table[i].word6 = None
+				self.table[i].word7 = None
+				self.table[i].word8 = dado 
+				self.table[i].valid_bit = 1
+				pseudoindex = bin(i)
+				newindex = pseudoindex[2:]
+				final = newindex.zfill(32)
+				self.table[i].index_binary = final
+			self.free += 1
+			if self.free == 128:
+				self.free = 0
 	def read_cache(self, num_address, binary_address, tipo_cache):
 		if tipo_cache == 'A1':
 			#######################################
