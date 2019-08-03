@@ -2720,6 +2720,7 @@ class Cache:
 			self.free += 1
 			if self.free == 128:
 				self.free = 0
+
 	def read_cache(self, num_address, binary_address, tipo_cache):
 		if tipo_cache == 'A1':
 			#######################################
@@ -3278,12 +3279,117 @@ class Cache:
 						self.table[i].word8 = int(num_address) 
 						self.table[i].valid_bit = 1
 					return 3
-
-
-		'''elif tipo_cache == 'B1':
-			pass
+		elif tipo_cache == 'B1':
+			#TWO-WAY SET ASSOCIATIVE: 1 WORD/BLOCK
+			######################################################
+			##          CONFIGURACAO DO ENDERECO 32 BITS        ##
+			##    TAG                 SET           SET OFFSET  ##   
+			##  22 BITS             O9 BITS           01 BIT    ##
+			######################################################
+			##TEM QUE CHECAR SE VAI DAR MISS COMPULSORY OU ALGO DO TIPO
+			i = int(binary_address[22:31], 2) #SET NO FORMATO DECIMAL
+			tag_dada_bin = binary_address[0:22] #pegando a tag que foi dada
+			dado = int(num_address) #dado a ser escrito na forma decimal
+			### CHECANDO PRA VER SE EH MISS COMPULSORIO #####
+			if self.table[i].bloco1.valid_bit == 0 and self.table[i].bloco2.valid_bit == 0:
+				#MISS COMPULSORY NA LATA. AZEDOU...
+				self.table[i].bloco1.word1 = dado
+				self.table[i].bloco1.tag_bin = tag_dada_bin 
+				self.table[i].bloco1.valid_bit = 1
+				self.table[i].livre += 1
+				self.table[i].fifo.append(1)
+				return 2
+			elif self.table[i].bloco1.valid_bit == 1 and self.table[i].bloco2.valid_bit == 0:
+				#BLOCO 1 DESSE SET JA TA OCUPADO... PODE SER QUE O DADO ESTEJA NO BLOCO 1 DESSE SET... CASO CONTRARIO TEM QUE DAR MISS COMPULSORY
+				if self.table[i].bloco1.tag_bin == tag_dada_bin and self.table[i].bloco1.word1 == dado :
+					return 1
+				else:
+					self.table[i].bloco2.word1 = dado
+					self.table[i].bloco2.tag_bin = tag_dada_bin 
+					self.table[i].bloco2.valid_bit = 1
+					self.table[i].livre += 2
+					self.table[i].fifo.append(2)
+					return 2
+			elif self.table[i].bloco1.valid_bit == 1 and self.table[i].bloco2.valid_bit == 1:
+				if self.table[i].bloco1.tag_bin == tag_dada_bin and self.table[i].bloco1.word1 == dado:
+					return 1
+				elif self.table[i].bloco2.tag_bin == tag_dada_bin and self.table[i].bloco2.word1 == dado:
+					return 1
+				else:
+					usado_ha_mais_tempo = self.table[i].fifo[0]
+					self.table[i].fifo.pop(0)
+					if usado_ha_mais_tempo == 1: #substitui o bloco 1 do set
+						self.table[i].bloco1.word1 = dado
+						self.table[i].bloco1.tag_bin = tag_dada_bin 
+						self.table[i].bloco1.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(1)
+					elif usado_ha_mais_tempo == 2: #substitui o bloco 2 do set
+						self.table[i].bloco2.word1 = dado
+						self.table[i].bloco2.tag_bin = tag_dada_bin 
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 2
+						self.table[i].fifo.append(2)
+					return 3
 		elif tipo_cache == 'B2':
-			pass
+			#TWO-WAY SET ASSOCIATIVE: 2 WORDs/BLOCK
+			######################################################
+			##          CONFIGURACAO DO ENDERECO 32 BITS        ##
+			##    TAG                 SET           SET OFFSET  ##   
+			##  22 BITS             O8 BITS          02 BITS    ##
+			######################################################
+			'''def write_cache(self, num_address, binary_address, tipo_cache):'''
+			i = int(binary_address[22:30], 2) #SET NO FORMATO DECIMAL
+			tag_dada_bin = binary_address[0:22]
+			dado = int(num_address)
+			### CHECANDO PRA VER SE EH MISS COMPULSORIO ###
+			if self.table[i].bloco1.valid_bit == 0 and self.table[i].bloco2.valid_bit == 0:
+				#COMPULSORY NA LATA... AZEDOU... JOGA PRO BLOCO 1
+				if dado % 2 == 0:
+					self.table[i].bloco1.word1 = dado
+					self.table[i].bloco1.word2 = dado + 1
+					self.table[i].bloco1.tag_bin = tag_dada_bin 
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+				elif dado % 2 == 1:
+					self.table[i].bloco1.word1 = dado - 1
+					self.table[i].bloco1.word2 = dado 
+					self.table[i].bloco1.tag_bin = tag_dada_bin 
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+				return 2
+			elif self.table[i].bloco1.valid_bit == 1 and self.table[i].bloco2.valid_bit == 0:
+				#TEM ALGO NO PRIMEIRO BLOCO... PODE SER QUE NAO SEJA O DADO. DAI CARREGA NO BLOCO 2
+				if self.table[i].bloco1.tag_bin == tag_dada_bin:
+					if self.table[i].bloco1.word1 == None or self.table[i].bloco1.word2 == None
+						#NESSE CASO TEM UMA WORD DO BLOCO QUE TA VAZIA. QUER DIZER Q ESSE BLOCO FOI ESCRITO RECENTEMENTE.... AI TEM QUE JOGAR O DADO PRO OUTRO BLOCO: BLOCO 2 NO CASO
+						if dado % 2 == 0:
+							self.table[i].bloco1.word1 = dado
+							self.table[i].bloco1.word2 = dado + 1
+							self.table[i].bloco1.tag_bin = tag_dada_bin 
+							self.table[i].bloco1.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(1)
+						elif dado % 2 == 1:
+							self.table[i].bloco1.word1 = dado - 1
+							self.table[i].bloco1.word2 = dado 
+							self.table[i].bloco1.tag_bin = tag_dada_bin 
+							self.table[i].bloco1.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(1)
+						return 2
+					else: #TEM ALGUMA MERDA NAS DUAS WORDS... MAS TIPO TEM QUE CHECAR PRA VER SE TA SUAVE
+						if dado % 2 == 0:
+							if self.table[i].bloco1.word1 == dado:
+								return 1
+							else:
+	
+						elif dado % 2 == 1:
+
+
+
 		elif tipo_cache == 'B3':
 			pass
 		elif tipo_cache == 'B4':
