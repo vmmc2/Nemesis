@@ -474,7 +474,7 @@ def main():
 					QTD_MISSES_CONFLITO += 1
 		memory.print_cache()
 	else:
-		print("O modo de cache inserido nao eh valido.")'''
+		print("O modo de cache inserido nao eh valido.")
 
 
 if __name__ == "__main__":
