@@ -4494,6 +4494,7 @@ class Cache:
 					self.table[i].bloco1.tag_bin = tag_dada_bin
 					self.table[i].livre += 1
 					self.table[i].fifo.append(1)
+					return 2
 				elif dado % 2 == 1:
 					self.table[i].bloco1.word1 = dado - 1
 					self.table[i].bloco1.word2 = dado
@@ -4501,6 +4502,7 @@ class Cache:
 					self.table[i].bloco1.tag_bin = tag_dada_bin
 					self.table[i].livre += 1
 					self.table[i].fifo.append(1)
+					return 2
 			elif self.table[i].bloco1.valid_bit == 1 and self.table[i].bloco2.valid_bit == 0 and self.table[i].bloco3.valid_bit == 0 and self.table[i].bloco4.valid_bit == 0: #JOGA NO BLOCO 2
 				if self.table[i].bloco1.tag_bin == tag_dada_bin:
 					if dado % 2 == 0:
@@ -4800,16 +4802,417 @@ class Cache:
 			##    TAG                 SET           SET OFFSET  ##   
 			##  22 BITS             O6 BITS          04 BITS    ##
 			######################################################
-
-
+			i = num(binary_address[22:28], 2)
+			tag_dada_bin = binary_address[0:22]
+			dado = int(num_address)
 			if self.table[i].bloco1.valid_bit == 0 and self.table[i].bloco2.valid_bit == 0 and self.table[i].bloco3.valid_bit == 0 and self.table[i].bloco4.valid_bit == 0: #MISS COMPULSORY... JOGA PRO BLOCO 1
-
+				if dado % 4 == 0:
+					self.table[i].bloco1.word1 = dado
+					self.table[i].bloco1.word2 = dado + 1
+					self.table[i].bloco1.word3 = dado + 2
+					self.table[i].bloco1.word4 = dado + 3
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+					return 2
+				elif dado % 4 == 1:
+					self.table[i].bloco1.word1 = dado - 1
+					self.table[i].bloco1.word2 = dado
+					self.table[i].bloco1.word3 = dado + 1
+					self.table[i].bloco1.word4 = dado + 2
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+					return 2
+				elif dado % 4 == 2:
+					self.table[i].bloco1.word1 = dado - 2
+					self.table[i].bloco1.word2 = dado - 1
+					self.table[i].bloco1.word3 = dado 
+					self.table[i].bloco1.word4 = dado + 1
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+					return 2
+				elif dado % 4 == 3:
+					self.table[i].bloco1.word1 = dado - 3
+					self.table[i].bloco1.word2 = dado - 2
+					self.table[i].bloco1.word3 = dado - 1
+					self.table[i].bloco1.word4 = dado
+					self.table[i].bloco1.valid_bit = 1
+					self.table[i].bloco1.tag_bin = tag_dada_bin
+					self.table[i].livre += 1
+					self.table[i].fifo.append(1)
+					return 2
 			elif self.table[i].bloco1.valid_bit == 1 and self.table[i].bloco2.valid_bit == 0 and self.table[i].bloco3.valid_bit == 0 and self.table[i].bloco4.valid_bit == 0:
-
+				if self.table[i].bloco1.tag_bin == tag_dada_bin:
+					if dado % 4 == 0:
+						if self.table[i].bloco1.word1 == dado:
+							return 1
+						elif self.table[i].bloco1.word1 != dado:
+							self.table[i].bloco2.word1 = dado
+							self.table[i].bloco2.word2 = dado + 1
+							self.table[i].bloco2.word3 = dado + 2
+							self.table[i].bloco2.word4 = dado + 3
+							self.table[i].bloco2.tag_bin = tag_dada_bin
+							self.table[i].bloco2.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(2)
+							return 3
+					elif dado % 4 == 1:
+						if self.table[i].bloco1.word2 == dado:
+							return 1
+						elif self.table[i].bloco1.word2 != dado:
+							self.table[i].bloco2.word1 = dado - 1
+							self.table[i].bloco2.word2 = dado
+							self.table[i].bloco2.word3 = dado + 1
+							self.table[i].bloco2.word4 = dado + 2
+							self.table[i].bloco2.tag_bin = tag_dada_bin
+							self.table[i].bloco2.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(2)
+							return 3
+					elif dado % 4 == 2:
+						if self.table[i].bloco1.word3 == dado:
+							return 1
+						elif self.table[i].bloco1.word3 != dado:
+							self.table[i].bloco2.word1 = dado - 2
+							self.table[i].bloco2.word2 = dado - 1
+							self.table[i].bloco2.word3 = dado
+							self.table[i].bloco2.word4 = dado + 1
+							self.table[i].bloco2.tag_bin = tag_dada_bin
+							self.table[i].bloco2.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(2)
+							return 3
+					elif dado % 4 == 3:
+						if self.table[i].bloco1.word4 == dado:
+							return 1
+						elif self.table[i].bloco1.word4 != dado:
+							self.table[i].bloco2.word1 = dado - 3
+							self.table[i].bloco2.word2 = dado - 2
+							self.table[i].bloco2.word3 = dado - 1
+							self.table[i].bloco2.word4 = dado 
+							self.table[i].bloco2.tag_bin = tag_dada_bin
+							self.table[i].bloco2.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(2)
+							return 3
+				if self.table[i].bloco1.tag_bin != tag_dada_bin:
+					if dado % 4 == 0:
+						self.table[i].bloco2.word1 = dado
+						self.table[i].bloco2.word2 = dado + 1
+						self.table[i].bloco2.word3 = dado + 2
+						self.table[i].bloco2.word4 = dado + 3
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(2)
+						return 2
+					elif dado % 4 == 1:
+						self.table[i].bloco2.word1 = dado - 1
+						self.table[i].bloco2.word2 = dado 
+						self.table[i].bloco2.word3 = dado + 1
+						self.table[i].bloco2.word4 = dado + 2
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(2)
+						return 2
+					elif dado % 4 == 2:
+						self.table[i].bloco2.word1 = dado - 2
+						self.table[i].bloco2.word2 = dado - 1
+						self.table[i].bloco2.word3 = dado 
+						self.table[i].bloco2.word4 = dado + 1
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(2)
+						return 2
+					elif dado % 4 == 3:
+						self.table[i].bloco2.word1 = dado - 3
+						self.table[i].bloco2.word2 = dado - 2
+						self.table[i].bloco2.word3 = dado - 1
+						self.table[i].bloco2.word4 = dado
+						self.table[i].bloco2.tag_bin = tag_dada_bin
+						self.table[i].bloco2.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(2)
+						return 2
 			elif self.table[i].bloco1.valid_bit == 1 and self.table[i].bloco2.valid_bit == 1 and self.table[i].bloco3.valid_bit == 0 and self.table[i].bloco4.valid_bit == 0:
-
+				#MAS ANTES TEM QUE CHECAR O BLOCO 1 E O BLOCO 2
+				#CHECANDO O BLOCO 1
+				if tag_dada_bin == self.table[i].bloco1.tag_bin: 
+					if dado % 4 == 0:
+						if self.table[i].bloco1.word1 == dado:
+							return 1
+						elif self.table[i].bloco1.word1 != dado:
+							self.table[i].bloco3.word1 = dado
+							self.table[i].bloco3.word2 = dado + 1
+							self.table[i].bloco3.word3 = dado + 2
+							self.table[i].bloco3.word4 = dado + 3
+							self.table[i].bloco3.tag_bin = tag_dada_bin
+							self.table[i].bloco3.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(3)
+							return 3
+					elif dado % 4 == 1:
+						if self.table[i].bloco1.word2 == dado:
+							return 1
+						elif self.table[i].bloco1.word2 != dado:
+							self.table[i].bloco3.word1 = dado - 1
+							self.table[i].bloco3.word2 = dado
+							self.table[i].bloco3.word3 = dado + 1
+							self.table[i].bloco3.word4 = dado + 2
+							self.table[i].bloco3.tag_bin = tag_dada_bin
+							self.table[i].bloco3.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(3)
+							return 3
+					elif dado % 4 == 2:
+						if self.table[i].bloco1.word3 == dado:
+							return 1
+						elif self.table[i].bloco1.word3 != dado:
+							self.table[i].bloco3.word1 = dado - 2
+							self.table[i].bloco3.word2 = dado - 1
+							self.table[i].bloco3.word2 = dado 
+							self.table[i].bloco3.word2 = dado + 1
+							self.table[i].bloco3.tag_bin = tag_dada_bin
+							self.table[i].bloco3.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(3)
+							return 3
+					elif dado % 4 == 3:
+						if self.table[i].bloco1.word4 == dado:
+							return 1
+						elif self.table[i].bloco1.word4 != dado:
+							self.table[i].bloco3.word1 = dado - 3
+							self.table[i].bloco3.word2 = dado - 2
+							self.table[i].bloco3.word2 = dado - 1
+							self.table[i].bloco3.word2 = dado
+							self.table[i].bloco3.tag_bin = tag_dada_bin
+							self.table[i].bloco3.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(3)
+							return 3
+				#CHECANDO O BLOCO 2
+				elif tag_dada_bin == self.table[i].bloco2.tag_bin: 
+					if dado % 4 == 0:
+						if self.table[i].bloco2.word1 == dado:
+							return 1
+						elif self.table[i].bloco2.word1 != dado:
+							self.table[i].bloco3.word1 = dado
+							self.table[i].bloco3.word2 = dado + 1
+							self.table[i].bloco3.word3 = dado + 2
+							self.table[i].bloco3.word4 = dado + 3
+							self.table[i].bloco3.tag_bin = tag_dada_bin
+							self.table[i].bloco3.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(3)
+							return 3
+					elif dado % 4 == 1:
+						if self.table[i].bloco2.word2 == dado:
+							return 1
+						elif self.table[i].bloco2.word2 != dado:
+							self.table[i].bloco3.word1 = dado - 1
+							self.table[i].bloco3.word2 = dado
+							self.table[i].bloco3.word3 = dado + 1
+							self.table[i].bloco3.word4 = dado + 2
+							self.table[i].bloco3.tag_bin = tag_dada_bin
+							self.table[i].bloco3.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(3)
+							return 3
+					elif dado % 4 == 2:
+						if self.table[i].bloco2.word3 == dado:
+							return 1
+						elif self.table[i].bloco2.word3 != dado:
+							self.table[i].bloco3.word1 = dado - 2
+							self.table[i].bloco3.word2 = dado - 1
+							self.table[i].bloco3.word3 = dado
+							self.table[i].bloco3.word4 = dado + 1
+							self.table[i].bloco3.tag_bin = tag_dada_bin
+							self.table[i].bloco3.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(3)
+							return 3
+					elif dado % 4 == 3:
+						if self.table[i].bloco2.word4 == dado:
+							return 1
+						elif self.table[i].bloco2.word4 != dado:
+							self.table[i].bloco3.word1 = dado - 3
+							self.table[i].bloco3.word2 = dado - 2
+							self.table[i].bloco3.word3 = dado - 1
+							self.table[i].bloco3.word4 = dado
+							self.table[i].bloco3.tag_bin = tag_dada_bin
+							self.table[i].bloco3.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(3)
+							return 3
+				else:
+					if dado % 4 == 0:
+						self.table[i].bloco3.word1 = dado
+						self.table[i].bloco3.word2 = dado + 1
+						self.table[i].bloco3.word3 = dado + 2
+						self.table[i].bloco3.word4 = dado + 3
+						self.table[i].bloco3.tag_bin = tag_dada_bin
+						self.table[i].bloco3.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(3)
+						return 3
+					elif dado % 4 == 1:
+						self.table[i].bloco3.word1 = dado - 1
+						self.table[i].bloco3.word2 = dado
+						self.table[i].bloco3.word3 = dado + 1
+						self.table[i].bloco3.word4 = dado + 2
+						self.table[i].bloco3.tag_bin = tag_dada_bin
+						self.table[i].bloco3.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(3)
+						return 3
+					elif dado % 4 == 2:
+						self.table[i].bloco3.word1 = dado - 2
+						self.table[i].bloco3.word2 = dado - 1
+						self.table[i].bloco3.word3 = dado
+						self.table[i].bloco3.word4 = dado + 1
+						self.table[i].bloco3.tag_bin = tag_dada_bin
+						self.table[i].bloco3.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(3)
+						return 3
+					elif dado % 4 == 3:
+						self.table[i].bloco3.word1 = dado - 3
+						self.table[i].bloco3.word2 = dado - 2
+						self.table[i].bloco3.word3 = dado - 1
+						self.table[i].bloco3.word4 = dado
+						self.table[i].bloco3.tag_bin = tag_dada_bin
+						self.table[i].bloco3.valid_bit = 1
+						self.table[i].livre += 1
+						self.table[i].fifo.append(3)
+						return 3
 			elif self.table[i].bloco1.valid_bit == 1 and self.table[i].bloco2.valid_bit == 1 and self.table[i].bloco3.valid_bit == 1 and self.table[i].bloco4.valid_bit == 0:
 
+
+
+				#EU PAREI AQUI PORRRRRRRRRRRRRRRRRRRRRRRRRRRRRAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+				#EU PAREI AQUI PORRRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+				#EU PAREI AQUI PORRRRRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+
+				#MAS ANTES TEM QUE CHECAR O BLOCO 1 E O BLOCO 2 E O BLOCO 3
+				#CHECANDO O BLOCO 1
+				if tag_dada_bin == self.table[i].bloco1.tag_bin: 
+					if dado % 4 == 0:
+						if self.table[i].bloco1.word1 == dado:
+							return 1
+						elif self.table[i].bloco1.word1 != dado:
+							self.table[i].bloco4.word1 = dado
+							self.table[i].bloco4.word2 = dado + 1
+							self.table[i].bloco4.tag_bin = tag_dada_bin
+							self.table[i].bloco4.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(4)
+							return 3
+					elif dado % 4 == 1:
+						if self.table[i].bloco1.word2 == dado:
+							return 1
+						elif self.table[i].bloco1.word2 != dado:
+							self.table[i].bloco4.word1 = dado - 1
+							self.table[i].bloco4.word2 = dado
+							self.table[i].bloco4.tag_bin = tag_dada_bin
+							self.table[i].bloco4.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(4)
+							return 3
+					elif dado % 4 == 1:
+						if self.table[i].bloco1.word2 == dado:
+							return 1
+						elif self.table[i].bloco1.word2 != dado:
+							self.table[i].bloco4.word1 = dado - 1
+							self.table[i].bloco4.word2 = dado
+							self.table[i].bloco4.tag_bin = tag_dada_bin
+							self.table[i].bloco4.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(4)
+							return 3
+					elif dado % 4 == 1:
+						if self.table[i].bloco1.word2 == dado:
+							return 1
+						elif self.table[i].bloco1.word2 != dado:
+							self.table[i].bloco4.word1 = dado - 1
+							self.table[i].bloco4.word2 = dado
+							self.table[i].bloco4.tag_bin = tag_dada_bin
+							self.table[i].bloco4.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(4)
+							return 3
+				#CHECANDO O BLOCO 2
+				elif tag_dada_bin == self.table[i].bloco2.tag_bin: 
+					if dado % 2 == 0:
+						if self.table[i].bloco2.word1 == dado:
+							return 1
+						elif self.table[i].bloco2.word1 != dado:
+							self.table[i].bloco4.word1 = dado
+							self.table[i].bloco4.word2 = dado + 1
+							self.table[i].bloco4.tag_bin = tag_dada_bin
+							self.table[i].bloco4.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(4)
+							return 3
+					elif dado % 2 == 1:
+						if self.table[i].bloco2.word2 == dado:
+							return 1
+						elif self.table[i].bloco2.word2 != dado:
+							self.table[i].bloco4.word1 = dado - 1
+							self.table[i].bloco4.word2 = dado
+							self.table[i].bloco4.tag_bin = tag_dada_bin
+							self.table[i].bloco4.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(4)
+							return 3
+				#CHECANDO O BLOCO 3
+				elif tag_dada_bin == self.table[i].bloco3.tag_bin: 
+					if dado % 2 == 0:
+						if self.table[i].bloco3.word1 == dado:
+							return 1
+						elif self.table[i].bloco3.word1 != dado:
+							self.table[i].bloco4.word1 = dado
+							self.table[i].bloco4.word2 = dado + 1
+							self.table[i].bloco4.tag_bin = tag_dada_bin
+							self.table[i].bloco4.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(4)
+							return 3
+					elif dado % 2 == 1:
+						if self.table[i].bloco3.word2 == dado:
+							return 1
+						elif self.table[i].bloco3.word2 != dado:
+							self.table[i].bloco4.word1 = dado - 1
+							self.table[i].bloco4.word2 = dado
+							self.table[i].bloco4.tag_bin = tag_dada_bin
+							self.table[i].bloco4.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(4)
+							return 3
+					else:
+						if dado % 2 == 0:
+							self.table[i].bloco4.word1 = dado
+							self.table[i].bloco4.word2 = dado + 1
+							self.table[i].bloco4.tag_bin = tag_dada_bin
+							self.table[i].bloco4.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(4)
+							return 3
+						elif dado % 2 == 1:
+							self.table[i].bloco4.word1 = dado - 1
+							self.table[i].bloco4.word2 = dado
+							self.table[i].bloco4.tag_bin = tag_dada_bin
+							self.table[i].bloco4.valid_bit = 1
+							self.table[i].livre += 1
+							self.table[i].fifo.append(4)
+							return 3
 			elif self.table[i].bloco1.valid_bit == 1 and self.table[i].bloco2.valid_bit == 1 and self.table[i].bloco3.valid_bit == 1 and self.table[i].bloco4.valid_bit == 1:
 
 		elif tipo_cache == 'C4':
