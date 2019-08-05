@@ -235,6 +235,7 @@ class Cache:
 			self.numero_sets = 1
 			self.table = []
 			self.free = 0
+			self.sentinela = 0
 			for element in range(0, 1024):
 				bloco = Block("A1")
 				self.table.append(bloco)
@@ -245,6 +246,7 @@ class Cache:
 			self.numero_sets = 1
 			self.table = []
 			self.free = 0
+			self.sentinela = 0
 			for element in range(0, 512):
 				bloco = Block("A2")
 				self.table.append(bloco)
@@ -255,6 +257,7 @@ class Cache:
 			self.numero_sets = 1
 			self.table = []
 			self.free = 0
+			self.sentinela = 0
 			for element in range(0, 256):
 				bloco = Block("A3")
 				self.table.append(bloco)
@@ -265,6 +268,7 @@ class Cache:
 			self.numero_sets = 1
 			self.table = []
 			self.free = 0
+			self.sentinela = 0
 			for element in range(0, 128):
 				bloco = Bloco("A4")
 				self.table.append(bloco)
@@ -2498,6 +2502,7 @@ class Cache:
 			final = newindex.zfill(32)
 			self.table[i].index_binary = final
 			self.free += 1
+			self.sentinela += 1
 			if self.free == 1024:
 				self.free = 0
 		elif tipo_cache == 'D2':
@@ -2528,6 +2533,7 @@ class Cache:
 				newindex = pseudoindex[2:]
 				final = newindex.zfill(32)
 				self.table[i].index_binary = final
+			self.sentinela += 1
 			self.free += 1
 			if self.free == 512:
 				self.free = 0
@@ -2585,6 +2591,7 @@ class Cache:
 				newindex = pseudoindex[2:]
 				final = newindex.zfill(32)
 				self.table[i].index_binary = final
+			self.sentinela += 1
 			self.free += 1
 			if self.free == 256:
 				self.free = 0
@@ -2718,6 +2725,7 @@ class Cache:
 				newindex = pseudoindex[2:]
 				final = newindex.zfill(32)
 				self.table[i].index_binary = final
+			self.sentinela += 1
 			self.free += 1
 			if self.free == 128:
 				self.free = 0
@@ -7332,7 +7340,16 @@ class Cache:
 						self.table[i].fifo.append(4)
 					return 3
 		elif tipo_cache == 'D1':
-			
+			#FULLY ASSOCIATIVE WITH 1 WORD/BLOCK
+			######################################################
+			##          CONFIGURACAO DO ENDERECO 32 BITS        ##
+			##                        TAG                       ##   
+			##                      32 BITS                     ##
+			######################################################
+			if self.sentinela <= 1023: #PODE SER QUE TENHA QUE PERCORRER A CACHE INTEIRA... PODE SER QUE NAO...
+				
+			elif self.sentinela >= 1024: #TEM QUE PERCORRER A CACHE INTEIRA
+
 		elif tipo_cache == 'D2':
 			pass
 		elif tipo_cache == 'D3':
