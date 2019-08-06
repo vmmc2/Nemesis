@@ -482,8 +482,13 @@ def main():
 		memory.print_cache()
 	else:
 		print("O modo de cache inserido nao eh valido.")
-
-
+	hit_rate = (QTD_HITS/QTD_ACESSOS) * 100
+	miss_rate = (QTD_MISSES/QTD_ACESSOS) * 100
+	########################################## HORA DE PRINTAR OS RESULTADOS DO ACESSOS ############################################
+	sentence = "Quantidade de Acessos ----- Quantidades de Hits ----- Quantidade de Misses ----- Hit Rate (%) ----- Miss Rate(%)"
+	frasefi = f"   {QTD_ACESSOS}                 {QTD_HITS}               {QTD_MISSES}          {hit_rate:.3f}%    {miss_rate:.3f}%"
+	print(sentence)
+	print(frasefi)
 
 if __name__ == "__main__":
 	main()
