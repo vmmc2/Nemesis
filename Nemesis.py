@@ -206,7 +206,7 @@ def main():
 
 	elif modo_cache == "B1":#CACHE TWO-WAY SET ASSOCIATIVE WITH 1 WORDS/BLOCK
 		#PRIMEIRO PASSO: INICIALIZAR A CACHE
-		memory = ch.cache("B1")
+		memory = ch.Cache("B1")
 		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
 		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
@@ -229,7 +229,7 @@ def main():
 		memory.print_cache()
 	elif modo_cache == "B2":#CACHE TWO-WAY SET ASSOCIATIVE WITH 2 WORDS/BLOCK
 		#PRIMEIRO PASSO: INICIALIZAR A CACHE
-		memory = ch.cache("B2")
+		memory = ch.Cache("B2")
 		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
 		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
@@ -252,7 +252,7 @@ def main():
 		memory.print_cache()
 	elif modo_cache == "B3":#CACHE TWO-WAY SET ASSOCIATIVE WITH 4 WORDS/BLOCK
 		#PRIMEIRO PASSO: INICIALIZAR A CACHE
-		memory = ch.cache("B3")
+		memory = ch.Cache("B3")
 		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
 		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
@@ -275,7 +275,7 @@ def main():
 		memory.print_cache()
 	elif modo_cache == "B4":#CACHE TWO-WAY SET ASSOCIATIVE WITH 8 WORDS/BLOCK
 		#PRIMEIRO PASSO: INICIALIZAR A CACHE
-		memory = ch.cache("B4")
+		memory = ch.Cache("B4")
 		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
 		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
@@ -298,7 +298,7 @@ def main():
 		memory.print_cache()
 	elif modo_cache == "C1":#CACHE FOUR-WAY SET ASSOCIATIVE WITH 1 WORDS/BLOCK
 		#PRIMEIRO PASSO: INICIALIZAR A CACHE
-		memory = ch.cache("C1")
+		memory = ch.Cache("C1")
 		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
 		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
@@ -321,7 +321,7 @@ def main():
 		memory.print_cache()
 	elif modo_cache == "C2":#CACHE FOUR-WAY SET ASSOCIATIVE WITH 2 WORDS/BLOCK
 		#PRIMEIRO PASSO: INICIALIZAR A CACHE
-		memory = ch.cache("C2")
+		memory = ch.Cache("C2")
 		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
 		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
@@ -344,7 +344,7 @@ def main():
 		memory.print_cache()
 	elif modo_cache == "C3":#CACHE FOUR-WAY SET ASSOCIATIVE WITH 4 WORDS/BLOCK
 		#PRIMEIRO PASSO: INICIALIZAR A CACHE
-		memory = ch.cache("C3")
+		memory = ch.Cache("C3")
 		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
 		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
@@ -367,7 +367,7 @@ def main():
 		memory.print_cache()
 	elif modo_cache == "C4":#CACHE FOUR-WAY SET ASSOCIATIVE WITH 8 WORDS/BLOCK
 		#PRIMEIRO PASSO: INICIALIZAR A CACHE
-		memory = ch.cache("C4")
+		memory = ch.Cache("C4")
 		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
 		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
@@ -390,7 +390,7 @@ def main():
 		memory.print_cache()
 	elif modo_cache == "D1":#CACHE EIGHT-WAY SET ASSOCIATIVE WITH 1 WORDS/BLOCK
 		#PRIMEIRO PASSO: INICIALIZAR A CACHE
-		memory = ch.cache("D1")
+		memory = ch.Cache("D1")
 		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
 		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
@@ -413,7 +413,7 @@ def main():
 		memory.print_cache()
 	elif modo_cache == "D2":#CACHE EIGHT-WAY SET ASSOCIATIVE WITH 2 WORDS/BLOCK
 		#PRIMEIRO PASSO: INICIALIZAR A CACHE
-		memory = ch.cache("D2")
+		memory = ch.Cache("D2")
 		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
 		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
@@ -436,7 +436,7 @@ def main():
 		memory.print_cache()
 	elif modo_cache == "D3":#CACHE EIGHT-WAY SET ASSOCIATIVE WITH 4 WORDS/BLOCK
 		#PRIMEIRO PASSO: INICIALIZAR A CACHE
-		memory = ch.cache("D3")
+		memory = ch.Cache("D3")
 		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
 		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
@@ -459,7 +459,7 @@ def main():
 		memory.print_cache()
 	elif modo_cache == "D4":#CACHE EIGHT-WAY SET ASSOCIATIVE WITH 8 WORDS/BLOCK
 		#PRIMEIRO PASSO: INICIALIZAR A CACHE
-		memory = ch.cache("D4")
+		memory = ch.Cache("D4")
 		#SEGUNDO PASSO: CALCULAR OS HITS E OS MISSES
 		for num_address, mode in lista_de_enderecos:
 			#CALCULA O ENDERECO PRIMEIRO. NO CASO TEM QUE CALCULAR O INDEX:
@@ -486,7 +486,7 @@ def main():
 	miss_rate = (QTD_MISSES/QTD_ACESSOS) * 100
 	########################################## HORA DE PRINTAR OS RESULTADOS DO ACESSOS ############################################
 	sentence = "Quantidade de Acessos ----- Quantidades de Hits ----- Quantidade de Misses ----- Hit Rate (%) ----- Miss Rate(%)"
-	frasefi = f"   {QTD_ACESSOS}                 {QTD_HITS}               {QTD_MISSES}          {hit_rate:.3f}%    {miss_rate:.3f}%"
+	frasefi = f"          {QTD_ACESSOS}                          {QTD_HITS}                          {QTD_MISSES}                  {hit_rate:.3f}%            {miss_rate:.3f}%"
 	print(sentence)
 	print(frasefi)
 
