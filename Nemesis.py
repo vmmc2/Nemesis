@@ -11,6 +11,13 @@ def imprime_lista(lista):
 	for address, modo in lista:
 		print("Address: {}  ---- Modo de Acesso: {}".format(address, modo))
 
+def eval_qtd_reads(lista):
+	qtd = 0
+	for num_address, mode in lista:
+		if mode == 'r':
+			qtd += 1
+	return qtd 
+
 def main():
 
 	print("Bem vindo ao Nemesis: Um simulador de cache baseado na arquitetura de processadores RISC-V.")
@@ -83,7 +90,7 @@ def main():
 
 	''' '''
 	'''VARIAVEIS QUE SERAO UTILIZADAS PARA COMPUTAR O MISS RATE, HIT RATE, ETC ETC'''
-	QTD_ACESSOS = qtd_enderecos
+	QTD_ACESSOS = eval_qtd_reads(lista_de_enderecos)
 	QTD_HITS = 0
 	QTD_MISSES = 0
 	QTD_MISSES_COMPULSORIOS = 0
@@ -475,6 +482,7 @@ def main():
 		memory.print_cache()
 	else:
 		print("O modo de cache inserido nao eh valido.")
+
 
 
 if __name__ == "__main__":
