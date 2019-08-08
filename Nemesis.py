@@ -26,9 +26,9 @@ def main():
 	print(" ")
 	print("Nele, seremos capazes de ver o estado final da Cache depois de termos realizado todas as operacoes de escrita e de leitura solicitadas pelo usuario.")
 	print(" ")
-	print("Alem disso, o Nemesis tambem fornece as importante taxas de Hit Rate e Miss Rate.")
+	print("Alem disso, o Nemesis tambem fornece as taxas de Hit Rate e Miss Rate.")
 	print(" ")
-	print("Ele tambem prove a quantidade de acessos realizados, a quantidade de hits e de misses (divididos em misses compulsorios e misses por conflito).")
+	print("Ele tambem prove a quantidade de acessos realizados, a quantidade de hits e de misses.")
 	print(" ")
 	print("Trabalharemos com um endereco de tamanho de 32 bits. Logo, o valor decimal inserido deve ser algo entre 0 ate 2e31 - 1. Com ambas as extremidades inclusas.")
 	print(" ")
@@ -54,13 +54,15 @@ def main():
 	print("OBS:. No caso de um arquivo do tipo .txt favor nomear o arquivo da seguinte maneira: 'entrada.txt' (sem aspas). Alem disso, o arquivo de entrada deve estar dentro da mesma pasta do projeto.")
 	print("Ademais, o arquivo devera ser organizado da segunte maneira, a primeira linha devera conter um numero n (quantidade de acessos a cache) e nas n linhas seguintes deveremos ter dois numeros e uma letra")
 	print("separados por um espaco de acordo com o seguinte layout:")
-	print("NUM_ADDRESS        MODO_DE_ACESSO.")
+	print("                                                              NUM_ADDRESS        MODO_DE_ACESSO.     ")
 	print("Tanto o endereco como o dado devem ser escrito de acordo com a base numerica decimal. O MODO_DE_ACESSO funciona assim: w(write) e r(read)")
 	print(" ")
 	print(" ")
 	print("No caso de um input pelo terminal, o layout deve ser o mesmo do layout da entrada por meio de um arquivo .txt")
 	print("Apos processar tanto as escritas como as leituras, o Nemesis ficara encarregada de apresentar o estado final da cache e mais: A quantidade de hits, misses(separados em misses por conflito e")
 	print("misses compulsorios, hit rate e miss rate.")
+	print(" ")
+	print(" ")
 	print("Input por um arquivo do tipo .txt: 1 ------------- Input pelo terminal: 2")
 	type_input = int(input())
 	lista_de_enderecos = []
@@ -402,6 +404,7 @@ def main():
 				memory.write_cache(num_address, binary_address, "D1")
 			elif mode == 'r':
 				hit_miss = memory.read_cache(num_address, binary_address, "D1")
+				print("Hit_miss = ", hit_miss)
 				if hit_miss == 1: #TIVEMOS UM HIT
 					QTD_HITS += 1
 				elif hit_miss == 2: #TIVEMOS UM MISS COMPULSORIO
