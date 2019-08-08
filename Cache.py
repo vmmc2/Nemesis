@@ -300,8 +300,36 @@ class Cache:
 				sentence2 = f"                                                 Word7: {self.table[i].word7} ---- Word8: {self.table[i].word8}"
 				print(sentence2)
 				print(" ")
+		elif self.tipo == 'B1':
+			for i in range(0, 512):
+				
+		elif self.tipo == 'B2':
+
+		elif self.tipo == 'B3':
+
+		elif self.tipo == 'B4':
+
+		elif self.tipo == 'C1':
+
+		elif self.tipo == 'C2':
+
+		elif self.tipo == 'C3':
+
+		elif self.tipo == 'C4':
+
+		elif self.tipo == 'D1':
+			for i in range (0, 1024):
+				sentence = f"Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_bin} ---- Data: {self.table[i].word1}"
+				print(sentence)
+		elif self.tipo == 'D2':
+
+		elif self.tipo == 'D3':
+
+		elif self.tipo == 'D4':
+
 		else:
 			print("Boy, isso ainda nao foi implementado. Segura ai! XD")
+
 
 	def write_cache(self, num_address, binary_address, tipo_cache):
 		if tipo_cache == 'A1':
@@ -7341,6 +7369,7 @@ class Cache:
 					return 3
 		elif tipo_cache == 'D1':
 			#FULLY ASSOCIATIVE WITH 1 WORD/BLOCK
+			'''def read_cache(self, num_address, binary_address, tipo_cache):'''
 			######################################################
 			##          CONFIGURACAO DO ENDERECO 32 BITS        ##
 			##                        TAG                       ##   
@@ -7354,9 +7383,10 @@ class Cache:
 						if self.table[i].word1 == dado:
 							return 1
 				#se chegou aqui e nao retornou 1 eh porque percorreu a cache e das duas uma: ou a tag dada nao bateu com nenhuma das tags na cache. Ou bateu a tag mas n bateu o dado. Ou seja: MISS MODAFUCKA
-				target = self.free
+				target = self.sentinela
 				self.table[target].tag_bin = tag_dada_bin
-				self.table[target].word1 = dado 
+				self.table[target].word1 = dado
+				self.sentinela += 1
 				self.table[target].valid_bit = 1
 				return 2
 			elif self.sentinela > 1024: #TEM QUE PERCORRER A CACHE INTEIRA
@@ -7364,9 +7394,10 @@ class Cache:
 					if self.table[i].tag_bin == tag_dada_bin:
 						if self.table[i].word1 == dado:
 							return 1
-				target = self.free
+				target = self.sentinela
 				self.table[target].tag_bin = tag_dada_bin
 				self.table[target].word1 = dado
+				self.sentinela += 1
 				self.table[target].valid_bit = 1
 				return 2
 		elif tipo_cache == 'D2':
@@ -7388,17 +7419,19 @@ class Cache:
 						elif dado % 2 == 1:
 							if self.table[i].word2 == dado:
 								return 1
-				target = self.free
+				target = self.sentinela
 				if dado % 2 == 0:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado
 					self.table[target].word2 = dado + 1
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 2 == 1:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 1
 					self.table[target].word2 = dado 
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				return 2
 			#TEM QUE VER A CACHE INTEIRA
 			elif self.sentinela > 512:
@@ -7410,17 +7443,19 @@ class Cache:
 						elif dado % 2 == 1:
 							if self.table[i].word2 == dado:
 								return 1
-				target = self.free
+				target = self.sentinela
 				if dado % 2 == 0:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado
 					self.table[target].word2 = dado + 1
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 2 == 1:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 1
 					self.table[target].word2 = dado 
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				return 2
 		elif tipo_cache == 'D3':
 			#FULLY ASSOCIATIVE WITH 4 WORDS/BLOCK
@@ -7447,7 +7482,7 @@ class Cache:
 						elif dado % 4 == 3:
 							if self.table[i].word4 == dado:
 								return 1
-				target = self.free
+				target = self.sentinela
 				if dado % 4 == 0:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado
@@ -7455,6 +7490,7 @@ class Cache:
 					self.table[target].word3 = dado + 2
 					self.table[target].word4 = dado + 3
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 4 == 1:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 1
@@ -7462,6 +7498,7 @@ class Cache:
 					self.table[target].word3 = dado + 1
 					self.table[target].word4 = dado + 2
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 4 == 2:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 2
@@ -7469,6 +7506,7 @@ class Cache:
 					self.table[target].word3 = dado 
 					self.table[target].word4 = dado + 1
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 4 == 3:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 3
@@ -7476,6 +7514,7 @@ class Cache:
 					self.table[target].word3 = dado - 1
 					self.table[target].word4 = dado 
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				return 2
 			#TEM QUE VER A CACHE INTEIRA
 			elif self.sentinela > 256:
@@ -7493,7 +7532,7 @@ class Cache:
 						elif dado % 4 == 3:
 							if self.table[i].word4 == dado:
 								return 1
-				target = self.free
+				target = self.sentinela
 				if dado % 4 == 0:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado
@@ -7501,6 +7540,7 @@ class Cache:
 					self.table[target].word3 = dado + 2
 					self.table[target].word4 = dado + 3
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 4 == 1:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 1
@@ -7508,6 +7548,7 @@ class Cache:
 					self.table[target].word3 = dado + 1
 					self.table[target].word4 = dado + 2
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 4 == 2:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 2
@@ -7515,6 +7556,7 @@ class Cache:
 					self.table[target].word3 = dado 
 					self.table[target].word4 = dado + 1
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 4 == 3:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 3
@@ -7522,6 +7564,7 @@ class Cache:
 					self.table[target].word3 = dado - 1
 					self.table[target].word4 = dado 
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				return 2
 		elif tipo_cache == 'D4':
 			#FULLY ASSOCIATIVE WITH 8 WORDS/BLOCK
@@ -7560,7 +7603,7 @@ class Cache:
 						elif dado % 8 == 7:
 							if self.table[i].word8 == dado:
 								return 1
-				target = self.free
+				target = self.sentinela
 				if dado % 8 == 0:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado
@@ -7572,6 +7615,7 @@ class Cache:
 					self.table[target].word7 = dado + 6
 					self.table[target].word8 = dado + 7
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 8 == 1:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 1
@@ -7583,6 +7627,7 @@ class Cache:
 					self.table[target].word7 = dado + 5
 					self.table[target].word8 = dado + 6
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 8 == 2:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 2
@@ -7594,6 +7639,7 @@ class Cache:
 					self.table[target].word7 = dado + 4
 					self.table[target].word8 = dado + 5
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 8 == 3:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 3
@@ -7605,6 +7651,7 @@ class Cache:
 					self.table[target].word7 = dado + 3
 					self.table[target].word8 = dado + 4
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 8 == 4:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 4
@@ -7616,6 +7663,7 @@ class Cache:
 					self.table[target].word7 = dado + 2
 					self.table[target].word8 = dado + 3
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 8 == 5:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 5
@@ -7627,6 +7675,7 @@ class Cache:
 					self.table[target].word7 = dado + 1
 					self.table[target].word8 = dado + 2
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 8 == 6:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 6
@@ -7638,6 +7687,7 @@ class Cache:
 					self.table[target].word7 = dado 
 					self.table[target].word8 = dado + 1
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 8 == 7:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 7
@@ -7649,6 +7699,7 @@ class Cache:
 					self.table[target].word7 = dado - 1
 					self.table[target].word8 = dado 
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				return 2
 			#TEM QUE VER A CACHE INTEIRA
 			elif self.sentinela > 128:
@@ -7678,7 +7729,7 @@ class Cache:
 						elif dado % 8 == 7:
 							if self.table[i].word8 == dado:
 								return 1
-				target = self.free
+				target = self.sentinela
 				if dado % 8 == 0:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado
@@ -7690,6 +7741,7 @@ class Cache:
 					self.table[target].word7 = dado + 6
 					self.table[target].word8 = dado + 7
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 8 == 1:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 1
@@ -7701,6 +7753,7 @@ class Cache:
 					self.table[target].word7 = dado + 5
 					self.table[target].word8 = dado + 6
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 8 == 2:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 2
@@ -7712,6 +7765,7 @@ class Cache:
 					self.table[target].word7 = dado + 4
 					self.table[target].word8 = dado + 5
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 8 == 3:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 3
@@ -7723,6 +7777,7 @@ class Cache:
 					self.table[target].word7 = dado + 3
 					self.table[target].word8 = dado + 4
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 8 == 4:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 4
@@ -7734,6 +7789,7 @@ class Cache:
 					self.table[target].word7 = dado + 2
 					self.table[target].word8 = dado + 3
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 8 == 5:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 5
@@ -7745,6 +7801,7 @@ class Cache:
 					self.table[target].word7 = dado + 1
 					self.table[target].word8 = dado + 2
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 8 == 6:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 6
@@ -7756,6 +7813,7 @@ class Cache:
 					self.table[target].word7 = dado 
 					self.table[target].word8 = dado + 1
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				elif dado % 8 == 7:
 					self.table[target].tag_bin = tag_dada_bin
 					self.table[target].word1 = dado - 7
@@ -7767,5 +7825,6 @@ class Cache:
 					self.table[target].word7 = dado - 1
 					self.table[target].word8 = dado 
 					self.table[target].valid_bit = 1
+					self.sentinela += 1
 				return 2
 #i
