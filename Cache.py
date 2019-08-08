@@ -301,22 +301,133 @@ class Cache:
 				print(sentence2)
 				print(" ")
 		elif self.tipo == 'B1':
+            #two-way set associative with 1 word/block
 			for i in range(0, 512):
-				
+                sentence = f"Set: {i:03} ---- Valid Bit: {self.table[i].bloco1.valid_bit} ---- Tag: {self.table[i].bloco1.tag_bin} ---- Word: {self.table[i].bloco1.word1}"
+                print(sentence)
+                sentence = f"                 Valid Bit: {self.table[i].bloco2.valid_bit} ---- Tag: {self.table[i].bloco2.tag_bin} ---- Word: {self.table[i].bloco2.word1}"
+                print(sentence)
+                print(" ")
 		elif self.tipo == 'B2':
-
+            #two-way set associative with 2 words/block
+            for i in range(0, 256):
+                sentence = f"Set: {i:03} ---- Valid Bit: {self.table[i].bloco1.valid_bit} ---- Tag: {self.table[i].bloco1.tag_bin} ---- Word1: {self.table[i].bloco1.word1} ---- Word2: {self.table[i].bloco1.word2}"
+                print(sentence)
+                sentence = f"                 Valid Bit: {self.table[i].bloco2.valid_bit} ---- Tag: {self.table[i].bloco2.tag_bin} ---- Word1: {self.table[i].bloco2.word1} ---- Word2: {self.table[i].bloco2.word2}"
+                print(sentence)
+                print(" ")
 		elif self.tipo == 'B3':
-
+            #two-way set associative with 4 words/block
+            for i in range(0, 128):
+                sentence = f"Set: {i:03} ---- Valid Bit: {self.table[i].bloco1.valid_bit} ---- Tag: {self.table[i].bloco1.tag_bin} ---- Word1: {self.table[i].bloco1.word1} ---- Word2: {self.table[i].bloco1.word2}"
+                new_sent = f"                                                                                                           Word3: {self.table[i].bloco1.word3} ---- Word4: {self.table[i].bloco1.word4}"
+                print(sentence)
+                print(new_sent)
+                sentence = f"                 Valid Bit: {self.table[i].bloco2.valid_bit} ---- Tag: {self.table[i].bloco2.tag_bin} ---- Word1: {self.table[i].bloco2.word1} ---- Word2: {self.table[i].bloco2.word2}"
+                new_sent = f"                                                                                                           Word3: {self.table[i].bloco2.word3} ---- Word4: {self.table[i].bloco2.word4}"
+                print(sentence)
+                print(new_sent)
+                print(" ")
 		elif self.tipo == 'B4':
-
+            #two-way set associative with 8 words/block
+            for i in range(0, 128):
+                sentence = f"Set: {i:03} ---- Valid Bit: {self.table[i].bloco1.valid_bit} ---- Tag: {self.table[i].bloco1.tag_bin} ---- Word1: {self.table[i].bloco1.word1} ---- Word2: {self.table[i].bloco1.word2}"
+                new_sent = f"                                                                                                           Word3: {self.table[i].bloco1.word3} ---- Word4: {self.table[i].bloco1.word4}"
+                new_sen2 = f"                                                                                                           Word5: {self.table[i].bloco1.word5} ---- Word6: {self.table[i].bloco1.word6}"
+                new_sen3 = f"                                                                                                           Word7: {self.table[i].bloco1.word7} ---- Word8: {self.table[i].bloco1.word8}"
+                print(sentence)
+                print(new_sent)
+                print(new_sen2)
+                print(new_sen3)
+                sentence = f"                 Valid Bit: {self.table[i].bloco2.valid_bit} ---- Tag: {self.table[i].bloco2.tag_bin} ---- Word1: {self.table[i].bloco2.word1} ---- Word2: {self.table[i].bloco2.word2}"
+                new_sent = f"                                                                                                           Word3: {self.table[i].bloco2.word3} ---- Word4: {self.table[i].bloco2.word4}"
+                new_sen2 = f"                                                                                                           Word5: {self.table[i].bloco2.word5} ---- Word6: {self.table[i].bloco2.word6}"
+                new_sen3 = f"                                                                                                           Word7: {self.table[i].bloco2.word7} ---- Word8: {self.table[i].bloco2.word8}"
+                print(sentence)
+                print(new_sent)
+                print(new_sen2)
+                print(new_sen3)
+                print(" ")
 		elif self.tipo == 'C1':
-
+            #four-way set associative with 1 word/block
+            for i in range(0, 256):
+                sentence = f"Set: {i:03} ---- Valid Bit: {self.table[i].bloco1.valid_bit} ---- Tag: {self.table[i].bloco1.tag_bin} ---- Word: {self.table[i].bloco1.word1}"
+                print(sentence)
+                sentence = f"                 Valid Bit: {self.table[i].bloco2.valid_bit} ---- Tag: {self.table[i].bloco2.tag_bin} ---- Word: {self.table[i].bloco2.word1}"
+                print(sentence)
+                sentence = f"                 Valid Bit: {self.table[i].bloco3.valid_bit} ---- Tag: {self.table[i].bloco3.tag_bin} ---- Word: {self.table[i].bloco3.word1}"
+                print(sentence)
+                sentence = f"                 Valid Bit: {self.table[i].bloco4.valid_bit} ---- Tag: {self.table[i].bloco4.tag_bin} ---- Word: {self.table[i].bloco4.word1}"
+                print(sentence)
+                print(" ")
 		elif self.tipo == 'C2':
-
+            #four-way set associative with 2 words/block
+            for i in range(0, 128):
+                sentence = f"Set: {i:03} ---- Valid Bit: {self.table[i].bloco1.valid_bit} ---- Tag: {self.table[i].bloco1.tag_bin} ---- Word1: {self.table[i].bloco1.word1} ---- Word2: {self.table[i].bloco1.word2}"
+                print(sentence)
+                sentence = f"                 Valid Bit: {self.table[i].bloco2.valid_bit} ---- Tag: {self.table[i].bloco2.tag_bin} ---- Word1: {self.table[i].bloco2.word1} ---- Word2: {self.table[i].bloco2.word2}"
+                print(sentence)
+                sentence = f"                 Valid Bit: {self.table[i].bloco3.valid_bit} ---- Tag: {self.table[i].bloco3.tag_bin} ---- Word1: {self.table[i].bloco3.word1} ---- Word2: {self.table[i].bloco3.word2}"
+                print(sentence)
+                sentence = f"                 Valid Bit: {self.table[i].bloco4.valid_bit} ---- Tag: {self.table[i].bloco4.tag_bin} ---- Word1: {self.table[i].bloco4.word1} ---- Word2: {self.table[i].bloco4.word2}"
+                print(sentence)
+                print(" ")
 		elif self.tipo == 'C3':
-
+            #four-way set associative with 4 words/block
+            for i in range(0, 64):
+                sentence = f"Set: {i:03} ---- Valid Bit: {self.table[i].bloco1.valid_bit} ---- Tag: {self.table[i].bloco1.tag_bin} ---- Word1: {self.table[i].bloco1.word1} ---- Word2: {self.table[i].bloco1.word2}"
+                new_sent = f"                                                                                                           Word3: {self.table[i].bloco1.word3} ---- Word2: {self.table[i].bloco1.word4}"
+                print(sentence)
+                print(new_sent)
+                sentence = f"                 Valid Bit: {self.table[i].bloco2.valid_bit} ---- Tag: {self.table[i].bloco2.tag_bin} ---- Word1: {self.table[i].bloco2.word1} ---- Word2: {self.table[i].bloco2.word2}"
+                new_sent = f"                                                                                                           Word3: {self.table[i].bloco2.word3} ---- Word2: {self.table[i].bloco2.word4}"
+                print(sentence)
+                print(new_sent)
+                sentence = f"                 Valid Bit: {self.table[i].bloco3.valid_bit} ---- Tag: {self.table[i].bloco3.tag_bin} ---- Word1: {self.table[i].bloco3.word1} ---- Word2: {self.table[i].bloco3.word2}"
+                new_sent = f"                                                                                                           Word3: {self.table[i].bloco3.word3} ---- Word2: {self.table[i].bloco3.word4}"
+                print(sentence)
+                print(new_sent)
+                sentence = f"                 Valid Bit: {self.table[i].bloco4.valid_bit} ---- Tag: {self.table[i].bloco4.tag_bin} ---- Word1: {self.table[i].bloco4.word1} ---- Word2: {self.table[i].bloco4.word2}"
+                new_sent = f"                                                                                                           Word3: {self.table[i].bloco4.word3} ---- Word2: {self.table[i].bloco4.word4}"
+                print(sentence)
+                print(new_sent)
+                print(" ")
 		elif self.tipo == 'C4':
-
+            #four-way set associative with 8 words/block
+            for i in range(0, 32):
+                sentence = f"Set: {i:03} ---- Valid Bit: {self.table[i].bloco1.valid_bit} ---- Tag: {self.table[i].bloco1.tag_bin} ---- Word1: {self.table[i].bloco1.word1} ---- Word2: {self.table[i].bloco1.word2}"
+                new_sent = f"                                                                                                           Word3: {self.table[i].bloco1.word3} ---- Word2: {self.table[i].bloco1.word4}"
+                new_sen2 = f"                                                                                                           Word3: {self.table[i].bloco1.word5} ---- Word2: {self.table[i].bloco2.word6}"
+                new_sent = f"                                                                                                           Word3: {self.table[i].bloco2.word7} ---- Word2: {self.table[i].bloco2.word8}"
+                print(sentence)
+                print(new_sent)
+                print(new_sen2)
+                print(new_sen3)
+                sentence = f"                 Valid Bit: {self.table[i].bloco2.valid_bit} ---- Tag: {self.table[i].bloco2.tag_bin} ---- Word1: {self.table[i].bloco2.word1} ---- Word2: {self.table[i].bloco2.word2}"
+                new_sent = f"                                                                                                           Word3: {self.table[i].bloco2.word3} ---- Word2: {self.table[i].bloco2.word4}"
+                new_sen2 = f"                                                                                                           Word3: {self.table[i].bloco2.word5} ---- Word2: {self.table[i].bloco2.word6}"
+                new_sent = f"                                                                                                           Word3: {self.table[i].bloco2.word7} ---- Word2: {self.table[i].bloco2.word8}"
+                print(sentence)
+                print(new_sent)
+                print(new_sen2)
+                print(new_sen3)
+                sentence = f"                 Valid Bit: {self.table[i].bloco3.valid_bit} ---- Tag: {self.table[i].bloco3.tag_bin} ---- Word1: {self.table[i].bloco3.word1} ---- Word2: {self.table[i].bloco3.word2}"
+                new_sent = f"                                                                                                           Word3: {self.table[i].bloco3.word3} ---- Word2: {self.table[i].bloco3.word4}"
+                new_sent = f"                                                                                                           Word3: {self.table[i].bloco3.word5} ---- Word2: {self.table[i].bloco3.word6}"
+                new_sent = f"                                                                                                           Word3: {self.table[i].bloco3.word7} ---- Word2: {self.table[i].bloco3.word8}"
+                print(sentence)
+                print(new_sent)
+                print(new_sen2)
+                print(new_sen3)
+                sentence = f"                 Valid Bit: {self.table[i].bloco4.valid_bit} ---- Tag: {self.table[i].bloco4.tag_bin} ---- Word1: {self.table[i].bloco4.word1} ---- Word2: {self.table[i].bloco4.word2}"
+                new_sent = f"                                                                                                           Word3: {self.table[i].bloco4.word3} ---- Word2: {self.table[i].bloco4.word4}"
+                new_sent = f"                                                                                                           Word3: {self.table[i].bloco4.word5} ---- Word2: {self.table[i].bloco4.word6}"
+                new_sent = f"                                                                                                           Word3: {self.table[i].bloco4.word7} ---- Word2: {self.table[i].bloco4.word8}"
+                print(sentence)
+                print(new_sent)
+                print(new_sen2)
+                print(new_sen3)
+                print(" ")
 		elif self.tipo == 'D1':
 			for i in range (0, 1024):
 				sentence = f"Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_bin} ---- Data: {self.table[i].word1}"
