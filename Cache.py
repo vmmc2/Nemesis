@@ -278,10 +278,12 @@ class Cache:
 			for i in range (0, 1024):
 				sentence = f"Index: {i:04} ---- Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_bin} ---- Data: {self.table[i].word1}"
 				print(sentence)
+                print(" ")
 		elif self.tipo == 'A2':
 			for i in range(0, 512):
 				sentence = f"Index: {i:03} ---- Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_bin} ---- Word1: {self.table[i].word1} ---- Word2: {self.table[i].word2}"
 				print(sentence)
+                print(" ")
 		elif self.tipo == 'A3':
 			for i in range(0, 256):
 				sentence = f"Index: {i:03} ---- Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_bin} ---- Word1: {self.table[i].word1} ---- Word2: {self.table[i].word2}"
@@ -429,17 +431,39 @@ class Cache:
                 print(new_sen3)
                 print(" ")
 		elif self.tipo == 'D1':
+            #fully-associative with 1 word/block
 			for i in range (0, 1024):
-				sentence = f"Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_bin} ---- Data: {self.table[i].word1}"
+				sentence = f"Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_bin} ---- Word: {self.table[i].word1}"
 				print(sentence)
+                print(" ")
 		elif self.tipo == 'D2':
-
+            #fully-associative with 2 words/block
+            for i in range(0, 512):
+                sentence = f"Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_bin} ---- Word1: {self.table[i].word1} ---- Word2: {self.table[i].word2}"
+                print(sentence)
+                print(" ")
 		elif self.tipo == 'D3':
-
+            #fully-associative with 4 words/block
+            for i in range(0, 256):
+                sentence = f"Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_bin} ---- Word1: {self.table[i].word1} ---- Word2: {self.table[i].word2}"
+                new_sent = f"                                                                            Word4: {self.table[i].word3} ---- Word4: {self.table[i].word4}"
+                print(sentence)
+                print(new_sent)
+                print(" ")
 		elif self.tipo == 'D4':
-
+            #fully-associative with 8 words/block
+            for i in range(0, 128):
+                sentence = f"Valid Bit: {self.table[i].valid_bit} ---- Tag: {self.table[i].tag_bin} ---- Word1: {self.table[i].word1} ---- Word2: {self.table[i].word2}"
+                new_sent = f"                                                                            Word4: {self.table[i].word3} ---- Word4: {self.table[i].word4}"
+                new_sen2 = f"                                                                            Word4: {self.table[i].word5} ---- Word4: {self.table[i].word6}"
+                new_sen3 = f"                                                                            Word4: {self.table[i].word7} ---- Word4: {self.table[i].word8}"
+                print(sentence)
+                print(new_sent)
+                print(new_sen2)
+                print(new_sen3)
+                print(" ")
 		else:
-			print("Boy, isso ainda nao foi implementado. Segura ai! XD")
+			print("ERRO: MODELO DE CACHE INVALIDO DADO NO INPUT!")
 
 
 	def write_cache(self, num_address, binary_address, tipo_cache):
